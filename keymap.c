@@ -154,7 +154,7 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 };
 
 void pointing_device_init_user(void) {
-    // set_auto_mouse_layer(_MOUS);
+    set_auto_mouse_layer(_MOUS);
     set_auto_mouse_enable(true);
 }
 
