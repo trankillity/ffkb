@@ -18,7 +18,7 @@ enum custom_keycodes {
 
 #include "config.h"
 #include "g/keymap_combo.h"
-#include "features/casemodes.h"
+// #include "features/casemodes.h"
 
 #ifdef RGB_MATRIX_LEDMAPS_ENABLED
     #include "features/rgb_matrix_ledmaps.h"
@@ -143,10 +143,10 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     NULL // Null terminate the array of overrides!
 };
 
-// void pointing_device_init_user(void) {
-//     set_auto_mouse_layer(_MOUS);
-//     set_auto_mouse_enable(true);
-// }
+void pointing_device_init_user(void) {
+    set_auto_mouse_layer(_MOUS);
+    set_auto_mouse_enable(true);
+}
 
 // bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 //     // Process case modes
