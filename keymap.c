@@ -3,11 +3,11 @@
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
     _BASE,
-    _CANR,
+    // _CANR,
     _NUMB,
     _NAVI,
     _MOUS,
-    _SYST,
+    // _SYST,
     _COMB
 };
 
@@ -26,8 +26,7 @@ enum custom_keycodes {
 #endif
 
 #define COMBO_ONLY_FROM_LAYER _COMB
-
-// #define AUTO_MOUSE_TIME 750
+#define AUTO_MOUSE_DEFAULT_LAYER _MOUS
 
 #define ___ KC_TRNS
 
@@ -70,18 +69,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_BASE] = LAYOUT_ffkb(
-    C_MSTG,        KC_Q,       KC_W,       KC_F,       KC_P,       KC_B,           KC_J,       KC_L,       KC_U,       KC_Y,       KC_QUOT,    C_MSTG,
+    C_SCRL,        KC_Q,       KC_W,       KC_F,       KC_P,       KC_B,           KC_J,       KC_L,       KC_U,       KC_Y,       KC_QUOT,    C_SCRL,
     C_TABI,        KC_A,       KC_R,       KC_S,       KC_T,       KC_G,           KC_M,       KC_N,       KC_E,       KC_I,       KC_O,       C_TABD,
     OSM_CTL,       KC_Z,       KC_X,       KC_C,       KC_D,       KC_V,           KC_K,       KC_H,       KC_COMM,    KC_DOT,     KC_SLSH,    OSM_CTL,
                        KC_NO,      OSL(_NUMB),        OSM_SFT,       KC_BSPC,        KC_ENTER,   KC_SPC,       OSL(_NAVI),       KC_NO
 ),
 
-[_CANR] = LAYOUT_ffkb(
-    C_MSTG,        KC_W,       KC_L,       KC_Y,       KC_P,       KC_B,           KC_Z,       KC_F,       KC_O,       KC_U,       KC_QUOT,    C_MSTG,
-    C_TABI,        KC_C,       KC_R,       KC_S,       KC_T,       KC_G,           KC_M,       KC_N,       KC_E,       KC_I,       KC_A,       C_TABD,
-    OSM_CTL,       KC_Q,       KC_J,       KC_V,       KC_D,       KC_K,           KC_X,       KC_H,       KC_SLSH,    KC_COMM,    KC_DOT,     OSM_CTL,
-                       KC_NO,      OSL(_NUMB),        OSM_SFT,       KC_BSPC,        KC_ENTER,   KC_SPC,       OSL(_NAVI),       KC_NO
-),
+// [_CANR] = LAYOUT_ffkb(
+//     C_MSTG,        KC_W,       KC_L,       KC_Y,       KC_P,       KC_B,           KC_Z,       KC_F,       KC_O,       KC_U,       KC_QUOT,    C_MSTG,
+//     C_TABI,        KC_C,       KC_R,       KC_S,       KC_T,       KC_G,           KC_M,       KC_N,       KC_E,       KC_I,       KC_A,       C_TABD,
+//     OSM_CTL,       KC_Q,       KC_J,       KC_V,       KC_D,       KC_K,           KC_X,       KC_H,       KC_SLSH,    KC_COMM,    KC_DOT,     OSM_CTL,
+//                        KC_NO,      OSL(_NUMB),        OSM_SFT,       KC_BSPC,        KC_ENTER,   KC_SPC,       OSL(_NAVI),       KC_NO
+// ),
 
 [_NUMB] = LAYOUT_ffkb(
   KC_F6,    KC_F5,      KC_F4,      KC_F3,      KC_F2,      KC_F1,              KC_EQL,     KC_7,       KC_8,       KC_9,       KC_DOT,         KC_EXLM,
@@ -98,18 +97,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_MOUS] = LAYOUT_ffkb(
-  _______, C_MSTG , C_MSTG , C_MSTG , C_MSTG , C_MSTG ,      C_MSTG , C_MSTG , C_MSTG , C_MSTG , C_MSTG , _______,
-  _______, C_MSTG , KC_BTN3, KC_BTN2, KC_BTN1, C_SCRL ,      C_SCRL , KC_BTN1, KC_BTN2, KC_BTN3, C_MSTG , _______,
-  _______, C_MSTG , C_MSTG , C_MSTG , C_MSTG , C_MSTG ,      C_MSTG , C_MSTG , C_MSTG , C_MSTG , C_MSTG , _______,
+  _______, KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_NO  ,      KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_NO  , _______,
+  _______, KC_NO  , KC_BTN3, KC_BTN2, KC_BTN1, C_SCRL ,      C_SCRL , KC_BTN1, KC_BTN2, KC_BTN3, KC_NO  , _______,
+  _______, KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_NO  ,      KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_NO  , _______,
                     _______, _______, _______, _______,      _______, _______, _______, _______
 ),
 
-[_SYST] = LAYOUT_ffkb(
-  _______, RGB_SPI, RGB_HUI, RGB_SAI, RGB_VAI, RGB_MOD,      RGB_RMOD, RGB_VAD, RGB_SAD, RGB_HUD, RGB_SPD, _______,
-  EEP_RST, _______, _______, DF(_CANR), DF(_BASE), RGB_TOG,      RGB_TOG, DF(_BASE), DF(_CANR), _______, _______, EEP_RST,
-  QK_BOOT, _______, _______, KC_PAUS, KC_PSCR, _______,      _______, KC_PSCR, KC_PAUS, _______, _______, QK_BOOT,
-                    _______, _______, _______, _______,      _______, _______, _______, _______
-),
+// [_MOUS] = LAYOUT_ffkb(
+//   _______, C_MSTG , C_MSTG , C_MSTG , C_MSTG , C_MSTG ,      C_MSTG , C_MSTG , C_MSTG , C_MSTG , C_MSTG , _______,
+//   _______, C_MSTG , KC_BTN3, KC_BTN2, KC_BTN1, C_SCRL ,      C_SCRL , KC_BTN1, KC_BTN2, KC_BTN3, C_MSTG , _______,
+//   _______, C_MSTG , C_MSTG , C_MSTG , C_MSTG , C_MSTG ,      C_MSTG , C_MSTG , C_MSTG , C_MSTG , C_MSTG , _______,
+//                     _______, _______, _______, _______,      _______, _______, _______, _______
+// ),
+
+// [_SYST] = LAYOUT_ffkb(
+//   _______, RGB_SPI, RGB_HUI, RGB_SAI, RGB_VAI, RGB_MOD,      RGB_RMOD, RGB_VAD, RGB_SAD, RGB_HUD, RGB_SPD, _______,
+//   EEP_RST, _______, _______, DF(_CANR), DF(_BASE), RGB_TOG,      RGB_TOG, DF(_BASE), DF(_CANR), _______, _______, EEP_RST,
+//   QK_BOOT, _______, _______, KC_PAUS, KC_PSCR, _______,      _______, KC_PSCR, KC_PAUS, _______, _______, QK_BOOT,
+//                     _______, _______, _______, _______,      _______, _______, _______, _______
+// ),
 
 // Combo layer. Never to be activated, just used or combo indexing purposes.
 [_COMB] = LAYOUT_ffkb(
