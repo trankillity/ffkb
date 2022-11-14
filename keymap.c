@@ -44,8 +44,6 @@ enum custom_keycodes {
 #define C_TABD      S(KC_TAB)
 #define C_WINI      FP_SUPER_TAB
 #define C_WIND      S(FP_SUPER_TAB)
-// #define C_WINI      A(KC_TAB)
-// #define C_WIND      S(A(KC_TAB))
 #define C_DSKT      G(KC_TAB)
 #define C_PEEK      G(KC_COMMA)
 #define C_SCRL      FP_SCROLL_TOG
@@ -150,34 +148,27 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 //     set_auto_mouse_enable(true);
 // }
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    // Process case modes
-    if (!process_case_modes(keycode, record)) {
-        return false;
-    }
+// bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+//     // Process case modes
+//     if (!process_case_modes(keycode, record)) {
+//         return false;
+//     }
 
-    // Regular user keycode case statement
-    switch (keycode) {
-        case C_CAPW:
-            if (record->event.pressed) {
-                enable_caps_word();
-            }
-            return false;
-            break;
-        case C_SNKC:
-            if (record->event.pressed) {
-                enable_xcase_with(KC_UNDS);
-            }
-            return false;
-            break;
-        // case C_SCRL:
-        //     if (record->event.pressed) {
-        //         fp_scroll_keycode_set(true);
-        //     } else {
-        //         fp_scroll_keycode_set(false);
-        //     }
-        //     return false;
-        default:
-            return true;
-    }
-}
+//     // Regular user keycode case statement
+//     switch (keycode) {
+//         case C_CAPW:
+//             if (record->event.pressed) {
+//                 enable_caps_word();
+//             }
+//             return false;
+//             break;
+//         case C_SNKC:
+//             if (record->event.pressed) {
+//                 enable_xcase_with(KC_UNDS);
+//             }
+//             return false;
+//             break;
+//         default:
+//             return true;
+//     }
+// }

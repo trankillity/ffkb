@@ -4,7 +4,7 @@ KEY_OVERRIDE_ENABLE = yes
 # MOUSEKEY_ENABLE = yes
 
 VPATH += keyboards/gboards
-SRC += features/casemodes.c
+# SRC += features/casemodes.c
 
 # SRC += trankillity.c
 
