@@ -43,7 +43,7 @@ enum custom_keycodes {
 #define C_TABI      KC_TAB
 #define C_TABD      S(KC_TAB)
 #define C_WINI      FP_SUPER_TAB
-#define C_WIND      S(FP_SUPER_TAB)
+#define C_WIND      FP_SUPER_TAB
 #define C_DSKT      G(KC_TAB)
 #define C_PEEK      G(KC_COMMA)
 #define C_SCRL      FP_SCROLL_TOG
