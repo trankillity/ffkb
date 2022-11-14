@@ -26,6 +26,9 @@ enum custom_keycodes {
 #endif
 
 #define COMBO_ONLY_FROM_LAYER _COMB
+#ifdef AUTO_MOUSE_DEFAULT_LAYER
+#undef AUTO_MOUSE_DEFAULT_LAYER
+#endif
 #define AUTO_MOUSE_DEFAULT_LAYER _MOUS
 
 #define ___ KC_TRNS
@@ -150,7 +153,7 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 };
 
 void pointing_device_init_user(void) {
-    set_auto_mouse_layer(_MOUS);
+    // set_auto_mouse_layer(_MOUS);
     set_auto_mouse_enable(true);
 }
 
