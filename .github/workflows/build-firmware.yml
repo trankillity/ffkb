@@ -1,0 +1,36 @@
+name: Build QMK firmware
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: qmkfm/qmk_cli
+    strategy:
+      fail-fast: false
+
+    steps:
+    - name: Checkout QMK
+      uses: actions/checkout@v3
+      with:
+        repository: https://github.com/sadekbaroudi/qmk_firmware
+        ref: develop_qmk
+        submodules: true
+
+    - name: Checkout keymap
+      uses: actions/checkout@v2
+      with:
+        path: keyboards/fingerpunch/ffkb_byomcu/v3/keymaps/${{ github.actor }}
+
+    - name: Build firmware
+      run: make fingerpunch/ffkb_byomcu/v3:${{ github.actor }} FP_TRACKBALL_ENABLE=yes CONVERT_TO=stemcell
+
+    - name: Archive firmware
+      uses: actions/upload-artifact@v2
+      with:
+        name: ffkb_v3_${{ github.actor }}
+        retention-days: 5
+        path: |
+          *.hex
+          *.bin
+          *.uf2
+      continue-on-error: true
