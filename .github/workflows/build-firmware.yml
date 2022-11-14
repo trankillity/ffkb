@@ -13,7 +13,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         repository: sadekbaroudi/qmk_firmware
-        ref: develop_fingerpunch
+        # ref: develop_fingerpunch
         submodules: true
 
     - name: Checkout keymap
