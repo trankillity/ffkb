@@ -14,7 +14,7 @@ jobs:
       with:
         repository: sadekbaroudi/qmk_firmware
         # ref: develop_fingerpunch
-        ref: develop_qmk
+        # ref: develop_qmk
         submodules: true
 
     - name: Checkout keymap

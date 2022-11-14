@@ -42,13 +42,14 @@ enum custom_keycodes {
 #define C_CRGT      C(KC_RIGHT)
 #define C_TABI      KC_TAB
 #define C_TABD      S(KC_TAB)
-// #define C_WINI      FP_SUPER_TAB
-// #define C_WIND      S(FP_SUPER_TAB)
-#define C_WINI      A(KC_TAB)
-#define C_WIND      S(A(KC_TAB))
+#define C_WINI      FP_SUPER_TAB
+#define C_WIND      S(FP_SUPER_TAB)
+// #define C_WINI      A(KC_TAB)
+// #define C_WIND      S(A(KC_TAB))
 #define C_DSKT      G(KC_TAB)
 #define C_PEEK      G(KC_COMMA)
 #define C_SCRL      FP_SCROLL_TOG
+#define C_MSTG      TG(_MOUS)
 
 #define OSM_SFT     OSM(MOD_LSFT)
 #define OSM_CTL     OSM(MOD_LCTL)
@@ -71,14 +72,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_BASE] = LAYOUT_ffkb(
-    KC_BTN1,       KC_Q,       KC_W,       KC_F,       KC_P,       KC_B,           KC_J,       KC_L,       KC_U,       KC_Y,       KC_QUOT,    KC_BTN2,
+    C_MSTG,        KC_Q,       KC_W,       KC_F,       KC_P,       KC_B,           KC_J,       KC_L,       KC_U,       KC_Y,       KC_QUOT,    C_MSTG,
     C_TABI,        KC_A,       KC_R,       KC_S,       KC_T,       KC_G,           KC_M,       KC_N,       KC_E,       KC_I,       KC_O,       C_TABD,
     OSM_CTL,       KC_Z,       KC_X,       KC_C,       KC_D,       KC_V,           KC_K,       KC_H,       KC_COMM,    KC_DOT,     KC_SLSH,    OSM_CTL,
                        KC_NO,      OSL(_NUMB),        OSM_SFT,       KC_BSPC,        KC_ENTER,   KC_SPC,       OSL(_NAVI),       KC_NO
 ),
 
 [_CANR] = LAYOUT_ffkb(
-    KC_BTN1,       KC_W,       KC_L,       KC_Y,       KC_P,       KC_B,           KC_Z,       KC_F,       KC_O,       KC_U,       KC_QUOT,    KC_BTN2,
+    C_MSTG,        KC_W,       KC_L,       KC_Y,       KC_P,       KC_B,           KC_Z,       KC_F,       KC_O,       KC_U,       KC_QUOT,    C_MSTG,
     C_TABI,        KC_C,       KC_R,       KC_S,       KC_T,       KC_G,           KC_M,       KC_N,       KC_E,       KC_I,       KC_A,       C_TABD,
     OSM_CTL,       KC_Q,       KC_J,       KC_V,       KC_D,       KC_K,           KC_X,       KC_H,       KC_SLSH,    KC_COMM,    KC_DOT,     OSM_CTL,
                        KC_NO,      OSL(_NUMB),        OSM_SFT,       KC_BSPC,        KC_ENTER,   KC_SPC,       OSL(_NAVI),       KC_NO
@@ -99,9 +100,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_MOUS] = LAYOUT_ffkb(
-  _______, KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_NO  ,      KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_NO  , _______,
-  _______, KC_NO  , KC_BTN3, KC_BTN2, KC_BTN1, C_SCRL ,      C_SCRL , KC_BTN1, KC_BTN2, KC_BTN3, KC_NO  , _______,
-  _______, KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_NO  ,      KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_NO  , _______,
+  _______, C_MSTG , C_MSTG , C_MSTG , C_MSTG , C_MSTG ,      C_MSTG , C_MSTG , C_MSTG , C_MSTG , C_MSTG , _______,
+  _______, C_MSTG , KC_BTN3, KC_BTN2, KC_BTN1, C_SCRL ,      C_SCRL , KC_BTN1, KC_BTN2, KC_BTN3, C_MSTG , _______,
+  _______, C_MSTG , C_MSTG , C_MSTG , C_MSTG , C_MSTG ,      C_MSTG , C_MSTG , C_MSTG , C_MSTG , C_MSTG , _______,
                     _______, _______, _______, _______,      _______, _______, _______, _______
 ),
 
@@ -145,7 +146,7 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 };
 
 void pointing_device_init_user(void) {
-    set_auto_mouse_layer(_MOUS);
+    // set_auto_mouse_layer(_MOUS);
     set_auto_mouse_enable(true);
 }
 
