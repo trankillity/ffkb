@@ -6,7 +6,7 @@ enum layer_names {
     // _CANR,
     _NUMB,
     _NAVI,
-    _MOUS,
+    // _MOUS,
     // _SYST,
     _COMB
 };
@@ -14,6 +14,7 @@ enum layer_names {
 enum custom_keycodes {
     C_CAPW = SAFE_RANGE,
     C_SNKC,
+    C_SCRL
 };
 
 #include "config.h"
@@ -26,11 +27,6 @@ enum custom_keycodes {
 #endif
 
 #define COMBO_ONLY_FROM_LAYER _COMB
-
-// #ifdef AUTO_MOUSE_DEFAULT_LAYER
-// #undef AUTO_MOUSE_DEFAULT_LAYER
-// #endif
-// #define AUTO_MOUSE_DEFAULT_LAYER _MOUS
 
 #define ___ KC_TRNS
 
@@ -49,8 +45,8 @@ enum custom_keycodes {
 #define C_WIND      S(FP_SUPER_TAB)
 #define C_DSKT      G(KC_TAB)
 #define C_PEEK      G(KC_COMMA)
-#define C_SCRL      FP_SCROLL_TOG
-#define C_MSTG      TG(_MOUS)
+// #define C_SCRL      FP_SCROLL_TOG
+// #define C_MSTG      TG(_MOUS)
 
 #define OSM_SFT     OSM(MOD_LSFT)
 #define OSM_CTL     OSM(MOD_LCTL)
@@ -100,12 +96,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                     _______, _______, _______, _______,      _______, _______, _______, _______
 ),
 
-[_MOUS] = LAYOUT_ffkb(
-  _______, KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_NO  ,      KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_NO  , _______,
-  _______, KC_NO  , KC_BTN3, KC_BTN2, KC_BTN1, C_SCRL ,      C_SCRL , KC_BTN1, KC_BTN2, KC_BTN3, KC_NO  , _______,
-  _______, KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_NO  ,      KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_NO  , _______,
-                    _______, _______, _______, _______,      _______, _______, _______, _______
-),
+// [_MOUS] = LAYOUT_ffkb(
+//   _______, KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_NO  ,      KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_NO  , _______,
+//   _______, KC_NO  , KC_BTN3, KC_BTN2, KC_BTN1, C_SCRL ,      C_SCRL , KC_BTN1, KC_BTN2, KC_BTN3, KC_NO  , _______,
+//   _______, KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_NO  ,      KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_NO  , _______,
+//                     _______, _______, _______, _______,      _______, _______, _______, _______
+// ),
 
 // [_MOUS] = LAYOUT_ffkb(
 //   _______, C_MSTG , C_MSTG , C_MSTG , C_MSTG , C_MSTG ,      C_MSTG , C_MSTG , C_MSTG , C_MSTG , C_MSTG , _______,
@@ -139,10 +135,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-// layer_state_t layer_state_set_user(layer_state_t state) {
-//   return update_tri_layer_state(state, _NUMB, _NAVI, _SYST);
-// };
-
 const key_override_t comma_override = ko_make_basic(MOD_MASK_SHIFT, KC_COMMA, KC_SCLN);
 const key_override_t fstop_override = ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_COLON);
 
@@ -153,10 +145,10 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     NULL // Null terminate the array of overrides!
 };
 
-void pointing_device_init_user(void) {
-    set_auto_mouse_layer(_MOUS);
-    set_auto_mouse_enable(true);
-}
+// void pointing_device_init_user(void) {
+//     set_auto_mouse_layer(_MOUS);
+//     set_auto_mouse_enable(true);
+// }
 
 // bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 //     // Process case modes
@@ -182,3 +174,19 @@ void pointing_device_init_user(void) {
 //             return true;
 //     }
 // }
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    // Regular user keycode case statement
+    switch (keycode) {
+        case C_SCRL:
+            if (record->event.pressed) {
+                fp_scroll_keycode_set(true);
+            } else {
+                fp_scroll_keycode_set(false);
+            }
+            return false;
+            break;
+        default:
+            return true;
+    }
+}
