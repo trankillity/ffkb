@@ -14,7 +14,6 @@ enum layer_names {
 enum custom_keycodes {
     C_CAPW = SAFE_RANGE,
     C_SNKC,
-    C_SCRL
 };
 
 #include "config.h"
@@ -45,8 +44,8 @@ enum custom_keycodes {
 #define C_WIND      S(FP_SUPER_TAB)
 #define C_DSKT      G(KC_TAB)
 #define C_PEEK      G(KC_COMMA)
-// #define C_SCRL      FP_SCROLL_TOG
-// #define C_MSTG      TG(_MOUS)
+#define C_SCRL      FP_SCROLL_MOMENT
+#define C_ZOOM      FP_ZOOM_MOMENT
 
 #define OSM_SFT     OSM(MOD_LSFT)
 #define OSM_CTL     OSM(MOD_LCTL)
@@ -69,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_BASE] = LAYOUT_ffkb(
-    C_SCRL,        KC_Q,       KC_W,       KC_F,       KC_P,       KC_B,           KC_J,       KC_L,       KC_U,       KC_Y,       KC_QUOT,    C_SCRL,
+    C_SCRL,        KC_Q,       KC_W,       KC_F,       KC_P,       KC_B,           KC_J,       KC_L,       KC_U,       KC_Y,       KC_QUOT,    C_ZOOM,
     C_TABI,        KC_A,       KC_R,       KC_S,       KC_T,       KC_G,           KC_M,       KC_N,       KC_E,       KC_I,       KC_O,       C_TABD,
     OSM_CTL,       KC_Z,       KC_X,       KC_C,       KC_D,       KC_V,           KC_K,       KC_H,       KC_COMM,    KC_DOT,     KC_SLSH,    OSM_CTL,
                        KC_NO,      OSL(_NUMB),        OSM_SFT,       KC_BSPC,        KC_ENTER,   KC_SPC,       OSL(_NAVI),       KC_NO
@@ -174,19 +173,3 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 //             return true;
 //     }
 // }
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    // Regular user keycode case statement
-    switch (keycode) {
-        case C_SCRL:
-            if (record->event.pressed) {
-                fp_scroll_keycode_set(true);
-            } else {
-                fp_scroll_keycode_set(false);
-            }
-            return false;
-            break;
-        default:
-            return true;
-    }
-}
