@@ -23,9 +23,9 @@ enum custom_keycodes {
 bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
     /* Disable combo `SOME_COMBO` on layer `_LAYER_A` */
     switch (combo_index) {
-        case cmb_btn1:
-        case cmb_btn2:
-        case cmb_btn3:
+        case btn1:
+        case btn2:
+        case btn3:
             if (!layer_state_is(_BASE)) {
                 return false;
             }
