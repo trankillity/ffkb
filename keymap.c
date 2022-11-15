@@ -20,6 +20,20 @@ enum custom_keycodes {
 #include "g/keymap_combo.h"
 // #include "features/casemodes.h"
 
+bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
+    /* Disable combo `SOME_COMBO` on layer `_LAYER_A` */
+    switch (combo_index) {
+        case cmb_btn1:
+        case cmb_btn2:
+        case cmb_btn3:
+            if (!layer_state_is(_BASE)) {
+                return false;
+            }
+    }
+
+    return true;
+}
+
 #ifdef RGB_MATRIX_LEDMAPS_ENABLED
     #include "features/rgb_matrix_ledmaps.h"
     #include "rgb_ledmaps.c"
