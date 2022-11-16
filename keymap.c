@@ -188,17 +188,17 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 //     }
 // }
 
-__attribute__((weak)) report_mouse_t pointing_device_task_keymap(report_mouse_t mouse_report) {
-    return mouse_report;
-}
+// __attribute__((weak)) report_mouse_t pointing_device_task_keymap(report_mouse_t mouse_report) {
+//     return mouse_report;
+// }
 
 // static uint8_t spd_limit = 50;
 
-report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
-    mouse_xy_report_t x = mouse_report.x, y = mouse_report.y;
+// report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+//     mouse_xy_report_t x = mouse_report.x, y = mouse_report.y;
 
-    mouse_report.x = 0;
-    mouse_report.y = 0;
+//     mouse_report.x = 0;
+//     mouse_report.y = 0;
     // if (x > 0) {
     //     x = (mouse_xy_report_t)(x > spd_limit ? x : (x / spd_limit) * x);
     // } else if (x < 0) {
@@ -209,8 +209,8 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     // } else if (y < 0) {
     //     y = (mouse_xy_report_t)(y < -spd_limit ? y : (y / -spd_limit) * y);
     // }
-    mouse_report.x = x;
-    mouse_report.y = y;
+//     mouse_report.x = x;
+//     mouse_report.y = y;
 
-    return pointing_device_task_keymap(mouse_report);
-}
+//     return pointing_device_task_keymap(mouse_report);
+// }
