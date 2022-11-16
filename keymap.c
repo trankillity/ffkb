@@ -192,25 +192,41 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 //     return mouse_report;
 // }
 
-// static uint8_t spd_limit = 50;
+uint8_t sign(uint8_t x) {
+    return (x > 0) - (x < 0);
+}
 
-// report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
-//     mouse_xy_report_t x = mouse_report.x, y = mouse_report.y;
+static uint8_t spd_limit = 20;
 
-//     mouse_report.x = 0;
-//     mouse_report.y = 0;
-    // if (x > 0) {
-    //     x = (mouse_xy_report_t)(x > spd_limit ? x : (x / spd_limit) * x);
-    // } else if (x < 0) {
-    //     x = (mouse_xy_report_t)(x < -spd_limit ? x : (x / -spd_limit) * x);
-    // }
-    // if (y > 0) {
-    //     y = (mouse_xy_report_t)(y > spd_limit ? y : (y / spd_limit) * y);
-    // } else if (y < 0) {
-    //     y = (mouse_xy_report_t)(y < -spd_limit ? y : (y / -spd_limit) * y);
-    // }
-//     mouse_report.x = x;
-//     mouse_report.y = y;
+report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+    mouse_xy_report_t x = mouse_report.x, y = mouse_report.y;
 
-//     return pointing_device_task_keymap(mouse_report);
-// }
+    mouse_report.x = 0;
+    mouse_report.y = 0;
+
+    uint8_t exp_x = (abs(x) > spd_limit ? x : (abs(x) / spd_limit));
+    uint8_t exp_y = (abs(y) > spd_limit ? y : (abs(y) / spd_limit));
+
+    // x = (mouse_xy_report_t)(abs(x) > spd_limit ? x : ( abs(x) / spd_limit ) * x + 2);
+    // y = (mouse_xy_report_t)(abs(y) > spd_limit ? y : ( abs(y) / spd_limit ) * y + 2);
+
+    if (x != 0){
+        if (abs(exp_x) > 1) {
+            x = (mouse_xy_report_t)(exp_x);
+        } else {
+            x = (mouse_xy_report_t)(exp_x + (2 * sign(exp_x)));
+        }
+    }
+    if (y != 0) {
+        if (abs(exp_y) > 1) {
+            y = (mouse_xy_report_t)(exp_y);
+        } else if (y < 0) {
+            y = (mouse_xy_report_t)(exp_y + (2 * sign(exp_y)));
+        }
+    }
+
+    mouse_report.x = x;
+    mouse_report.y = y;
+
+    return pointing_device_task_keymap(mouse_report);
+}
