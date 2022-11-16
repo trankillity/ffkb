@@ -188,9 +188,9 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 //     }
 // }
 
-// __attribute__((weak)) report_mouse_t pointing_device_task_keymap(report_mouse_t mouse_report) {
-//     return mouse_report;
-// }
+__attribute__((weak)) report_mouse_t pointing_device_task_keymap(report_mouse_t mouse_report) {
+    return mouse_report;
+}
 
 uint8_t sign(uint8_t x) {
     return (x > 0) - (x < 0);
