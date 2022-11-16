@@ -18,7 +18,7 @@ jobs:
         submodules: true
 
     - name: Checkout keymap
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         path: keyboards/fingerpunch/ffkb_byomcu/v3/keymaps/${{ github.actor }}
 
@@ -26,7 +26,7 @@ jobs:
       run: make fingerpunch/ffkb_byomcu/v3:${{ github.actor }} FP_TRACKBALL_ENABLE=yes CONVERT_TO=stemcell
 
     - name: Archive firmware
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: ffkb_v3_${{ github.actor }}
         retention-days: 5

@@ -187,3 +187,23 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 //             return true;
 //     }
 // }
+static uint8_t spd_limit = 50;
+
+report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+    mouse_xy_report_t x = mouse_report.x, y = mouse_report.y;
+
+    mouse_report.x = 0;
+    mouse_report.y = 0;
+    if (x > 0) {
+        x = (x > spd_limit) ? x : ((x * 100) / (spd_limit * 100) / 100) * x;
+    } else if (x < 0) {
+        x = (x < -spd_limit) ? x : ((x * 100) / (-spd_limit * 100) / 100) * x;
+    }
+    if (y > 0) {
+        y = (y > spd_limit) ? y : ((y * 100) / (spd_limit * 100) / 100) * y;
+    } else if (y < 0) {
+        y = (y < -spd_limit) ? y : ((y * 100) / (-spd_limit * 100) / 100) * y;
+    }
+    mouse_report.x = x;
+    mouse_report.y = y;
+}
