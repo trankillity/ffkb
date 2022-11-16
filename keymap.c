@@ -220,7 +220,7 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     if (y != 0) {
         if (abs(exp_y) > 1) {
             y = (mouse_xy_report_t)(exp_y);
-        } else if (y < 0) {
+        } else {
             y = (mouse_xy_report_t)(exp_y + (2 * sign(exp_y)));
         }
     }
