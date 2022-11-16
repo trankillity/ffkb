@@ -187,6 +187,11 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 //             return true;
 //     }
 // }
+
+__attribute__((weak)) report_mouse_t pointing_device_task_keymap(report_mouse_t mouse_report) {
+    return mouse_report;
+}
+
 static uint8_t spd_limit = 50;
 
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
@@ -206,4 +211,6 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     }
     mouse_report.x = x;
     mouse_report.y = y;
+
+    return pointing_device_task_keymap(mouse_report);
 }
