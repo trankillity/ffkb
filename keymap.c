@@ -199,16 +199,16 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
 
     mouse_report.x = 0;
     mouse_report.y = 0;
-    if (x > 0) {
-        x = (mouse_xy_report_t)(x > spd_limit ? x : (x / spd_limit) * x);
-    } else if (x < 0) {
-        x = (mouse_xy_report_t)(x < -spd_limit ? x : (x / -spd_limit) * x);
-    }
-    if (y > 0) {
-        y = (mouse_xy_report_t)(y > spd_limit ? y : (y / spd_limit) * y);
-    } else if (y < 0) {
-        y = (mouse_xy_report_t)(y < -spd_limit ? y : (y / -spd_limit) * y);
-    }
+    // if (x > 0) {
+    //     x = (mouse_xy_report_t)(x > spd_limit ? x : (x / spd_limit) * x);
+    // } else if (x < 0) {
+    //     x = (mouse_xy_report_t)(x < -spd_limit ? x : (x / -spd_limit) * x);
+    // }
+    // if (y > 0) {
+    //     y = (mouse_xy_report_t)(y > spd_limit ? y : (y / spd_limit) * y);
+    // } else if (y < 0) {
+    //     y = (mouse_xy_report_t)(y < -spd_limit ? y : (y / -spd_limit) * y);
+    // }
     mouse_report.x = x;
     mouse_report.y = y;
 
