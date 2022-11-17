@@ -192,12 +192,12 @@ __attribute__((weak)) report_mouse_t pointing_device_task_keymap(report_mouse_t 
     return mouse_report;
 }
 
-uint8_t sign(uint8_t x) {
-    return (x > 0) - (x < 0);
-}
+// uint8_t sign(uint8_t x) {
+//     return (x > 0) - (x < 0);
+// }
 
-static uint8_t spd_limit = 50;
-static uint8_t min_clamp = 1;
+static uint8_t spd_limit = 70;
+static uint8_t min_clamp = 2;
 
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     mouse_xy_report_t x = mouse_report.x, y = mouse_report.y;
@@ -215,14 +215,22 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
         if (abs(exp_x) > min_clamp) {
             x = (mouse_xy_report_t)(exp_x);
         } else {
-            x = (mouse_xy_report_t)(min_clamp * sign(x));
+            if (x > 0) {
+                x = (mouse_xy_report_t)(min_clamp);
+            } else if (x < 0) {
+                x = (mouse_xy_report_t)(-min_clamp);
+            }
         }
     }
     if (y != 0) {
         if (abs(exp_y) > min_clamp) {
             y = (mouse_xy_report_t)(exp_y);
         } else {
-            y = (mouse_xy_report_t)(min_clamp * sign(y));
+            if (y > 0) {
+                y = (mouse_xy_report_t)(min_clamp);
+            } else if (y < 0) {
+                y = (mouse_xy_report_t)(-min_clamp);
+            }
         }
     }
 
