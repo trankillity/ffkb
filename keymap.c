@@ -207,10 +207,10 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     // y = (mouse_xy_report_t)(abs(y) > spd_limit ? y : ( abs(y) / spd_limit ) * y + 2);
 
     if (x != 0) {
-        x = (mouse_xy_report_t)(abs(exp_x) > min_clamp ? min_clamp * sign(x) : exp_x)
+        x = (mouse_xy_report_t)(abs(exp_x) > min_clamp ? min_clamp * sign(x) : exp_x);
     }
     if (y != 0) {
-        y = (mouse_xy_report_t)(abs(exp_y) > min_clamp ? min_clamp * sign(y) : exp_y)
+        y = (mouse_xy_report_t)(abs(exp_y) > min_clamp ? min_clamp * sign(y) : exp_y);
     }
 
     mouse_report.x = x;
