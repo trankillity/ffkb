@@ -191,8 +191,8 @@ int sign(int x) {
     return (x > 0) - (x < 0);
 }
 
-static uint8_t spd_limit = 70;
-static uint8_t min_clamp = 2;
+static uint8_t crv_limit = 70;
+// static uint8_t min_clamp = 2;
 
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     mouse_xy_report_t x = mouse_report.x, y = mouse_report.y;
@@ -200,11 +200,11 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     mouse_report.x = 0;
     mouse_report.y = 0;
 
-    int exp_x = (abs(x) > spd_limit ? x : (abs(x) / spd_limit) * x * sign(x));
-    int exp_y = (abs(y) > spd_limit ? y : (abs(y) / spd_limit) * y * sign(y));
+    int exp_x = (abs(x) > crv_limit ? x : (abs(x) / crv_limit) * x * sign(x));
+    int exp_y = (abs(y) > crv_limit ? y : (abs(y) / crv_limit) * y * sign(y));
 
-    // x = (mouse_xy_report_t)(abs(x) > spd_limit ? x : ( abs(x) / spd_limit ) * x + 2);
-    // y = (mouse_xy_report_t)(abs(y) > spd_limit ? y : ( abs(y) / spd_limit ) * y + 2);
+    // x = (mouse_xy_report_t)(abs(x) > crv_limit ? x : ( abs(x) / crv_limit ) * x + 2);
+    // y = (mouse_xy_report_t)(abs(y) > crv_limit ? y : ( abs(y) / crv_limit ) * y + 2);
 
     // if (x != 0) {
     //     x = (mouse_xy_report_t)(abs(exp_x) < min_clamp ? min_clamp * sign(x) : exp_x);
