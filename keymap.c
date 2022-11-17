@@ -34,11 +34,6 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
     return true;
 }
 
-#ifdef RGB_MATRIX_LEDMAPS_ENABLED
-    #include "features/rgb_matrix_ledmaps.h"
-    #include "rgb_ledmaps.c"
-#endif
-
 #define COMBO_ONLY_FROM_LAYER _COMB
 
 #define ___ KC_TRNS
@@ -192,9 +187,9 @@ __attribute__((weak)) report_mouse_t pointing_device_task_keymap(report_mouse_t 
     return mouse_report;
 }
 
-// uint8_t sign(uint8_t x) {
-//     return (x > 0) - (x < 0);
-// }
+int sign(int x) {
+    return (x > 0) - (x < 0);
+}
 
 static uint8_t spd_limit = 70;
 static uint8_t min_clamp = 2;
@@ -205,33 +200,17 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     mouse_report.x = 0;
     mouse_report.y = 0;
 
-    uint8_t exp_x = (abs(x) > spd_limit ? x : (abs(x) / spd_limit));
-    uint8_t exp_y = (abs(y) > spd_limit ? y : (abs(y) / spd_limit));
+    int exp_x = (abs(x) > spd_limit ? x : (abs(x) / spd_limit) * x * sign(x));
+    int exp_y = (abs(y) > spd_limit ? y : (abs(y) / spd_limit) * y * sign(y));
 
     // x = (mouse_xy_report_t)(abs(x) > spd_limit ? x : ( abs(x) / spd_limit ) * x + 2);
     // y = (mouse_xy_report_t)(abs(y) > spd_limit ? y : ( abs(y) / spd_limit ) * y + 2);
 
-    if (x != 0){
-        if (abs(exp_x) > min_clamp) {
-            x = (mouse_xy_report_t)(exp_x);
-        } else {
-            if (x > 0) {
-                x = (mouse_xy_report_t)(min_clamp);
-            } else if (x < 0) {
-                x = (mouse_xy_report_t)(-min_clamp);
-            }
-        }
+    if (x != 0) {
+        x = (mouse_xy_report_t)(abs(exp_x) > min_clamp ? min_clamp * sign(x) : exp_x)
     }
     if (y != 0) {
-        if (abs(exp_y) > min_clamp) {
-            y = (mouse_xy_report_t)(exp_y);
-        } else {
-            if (y > 0) {
-                y = (mouse_xy_report_t)(min_clamp);
-            } else if (y < 0) {
-                y = (mouse_xy_report_t)(-min_clamp);
-            }
-        }
+        y = (mouse_xy_report_t)(abs(exp_y) > min_clamp ? min_clamp * sign(y) : exp_y)
     }
 
     mouse_report.x = x;
