@@ -200,8 +200,8 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     mouse_report.x = 0;
     mouse_report.y = 0;
 
-    int exp_x = (abs(x) > crv_limit - min_clamp || x == 0 ? x : (abs(x) / crv_limit) * x + (min_clamp * sign(x)));
-    int exp_y = (abs(y) > crv_limit - min_clamp || y == 0 ? y : (abs(y) / crv_limit) * y + (min_clamp * sign(y)));
+    int exp_x = (abs(x) > crv_limit - min_clamp || x == 0 ? (abs(x) / crv_limit) * x + (min_clamp * sign(x)) : x);
+    int exp_y = (abs(y) > crv_limit - min_clamp || y == 0 ? (abs(y) / crv_limit) * y + (min_clamp * sign(y)) : y);
 
     // x = (mouse_xy_report_t)(abs(x) > crv_limit ? x : ( abs(x) / crv_limit ) * x + 2);
     // y = (mouse_xy_report_t)(abs(y) > crv_limit ? y : ( abs(y) / crv_limit ) * y + 2);
