@@ -65,7 +65,7 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
 bool accel_enabled = false;
 
 void toggle_accel() {
-    accel_enabled = !accel_enabled
+    accel_enabled = !accel_enabled;
 }
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
