@@ -208,7 +208,7 @@ int sign(int x) {
     return (x > 0) - (x < 0);
 }
 
-static uint8_t crv_limit = 80;
+static uint8_t crv_limit = 50;
 static uint8_t min_clamp = 1;
 
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
@@ -219,8 +219,8 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
 
         x = (mouse_xy_report_t)(abs(x) > crv_limit - min_clamp || x == 0 ? (abs(x) / crv_limit) * x + (min_clamp * sign(x)) : x);
         y = (mouse_xy_report_t)(abs(y) > crv_limit - min_clamp || y == 0 ? (abs(y) / crv_limit) * y + (min_clamp * sign(y)) : y);
-        // x = (mouse_xy_report_t)(abs(x) > crv_limit - min_clamp || x == 0 ? x : (abs(x) / crv_limit) * x + (min_clamp * sign(x)));
-        // y = (mouse_xy_report_t)(abs(y) > crv_limit - min_clamp || y == 0 ? y : (abs(y) / crv_limit) * y + (min_clamp * sign(y)));
+        x = x/2;
+        y = y/2;
     }
 
     mouse_report.x = x;
