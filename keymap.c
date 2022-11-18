@@ -14,6 +14,7 @@ enum layer_names {
 enum custom_keycodes {
     C_CAPW = SAFE_RANGE,
     C_SNKC,
+    TGL_ACC,
 };
 
 #include "config.h"
@@ -61,6 +62,12 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
 #define OSM_ALT     OSM(MOD_LALT)
 #define OSM_GUI     OSM(MOD_LGUI)
 
+bool accel_enabled = false;
+
+void toggle_accel() {
+    accel_enabled = !accel_enabled
+}
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Base - Colemak
  *
@@ -100,7 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_NAVI] = LAYOUT_ffkb(
   C_SNKC, KC_INS, KC_HOME, KC_UP,   KC_END,  KC_PGUP,      KC_ESC,  C_WIND,  C_WINI,  C_DSKT,  C_PEEK,  KC_BSLS,
   C_TABI, C_SELA, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN,      KC_VOLU, OSM_SFT, OSM_CTL, OSM_ALT, OSM_GUI, C_TABD,
-  C_CAPW, C_UNDO, C_CUT,   C_COPY,  C_PAST,  C_REDO,       KC_VOLD, KC_MPRV, KC_MPLY, KC_MNXT, KC_MSTP, KC_MUTE,
+  TGL_ACC, C_UNDO, C_CUT,   C_COPY,  C_PAST,  C_REDO,       KC_VOLD, KC_MPRV, KC_MPLY, KC_MNXT, KC_MSTP, KC_MUTE,
                     _______, _______, _______, _______,      _______, _______, _______, _______
 ),
 
@@ -182,6 +189,16 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 //             return true;
 //     }
 // }
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    // Regular user keycode case statement
+    switch (keycode) {
+        case TGL_ACC:
+            toggle_accel();
+            return false;
+        default:
+            return true;
+    }
+}
 
 __attribute__((weak)) report_mouse_t pointing_device_task_keymap(report_mouse_t mouse_report) {
     return mouse_report;
@@ -196,12 +213,13 @@ static uint8_t min_clamp = 1;
 
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     mouse_xy_report_t x = mouse_report.x, y = mouse_report.y;
+    if (accel_enabled) {
+        mouse_report.x = 0;
+        mouse_report.y = 0;
 
-    mouse_report.x = 0;
-    mouse_report.y = 0;
-
-    x = (mouse_xy_report_t)(abs(x) > crv_limit - min_clamp || x == 0 ? (abs(x) / crv_limit) * x + (min_clamp * sign(x)) : x);
-    y = (mouse_xy_report_t)(abs(y) > crv_limit - min_clamp || y == 0 ? (abs(y) / crv_limit) * y + (min_clamp * sign(y)) : y);
+        x = (mouse_xy_report_t)(abs(x) > crv_limit - min_clamp || x == 0 ? (abs(x) / crv_limit) * x + (min_clamp * sign(x)) : x);
+        y = (mouse_xy_report_t)(abs(y) > crv_limit - min_clamp || y == 0 ? (abs(y) / crv_limit) * y + (min_clamp * sign(y)) : y);
+    }
 
     mouse_report.x = x;
     mouse_report.y = y;
