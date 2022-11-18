@@ -64,7 +64,7 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
 
 bool accel_enabled = false;
 
-void toggle_accel() {
+void toggle_accel(void) {
     accel_enabled = !accel_enabled;
 }
 
