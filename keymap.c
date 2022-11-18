@@ -215,7 +215,7 @@ static uint8_t min_clamp = 1;
 
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     mouse_xy_report_t x = mouse_report.x, y = mouse_report.y;
-    if (accel_enabled) {
+    if (accel_enabled && !fp_scroll_get()) {
         mouse_report.x = 0;
         mouse_report.y = 0;
 
