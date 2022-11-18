@@ -6,7 +6,7 @@
 
 #ifdef FP_POINTING_DEFAULT_DPI
     #undef FP_POINTING_DEFAULT_DPI
-    #define FP_POINTING_DEFAULT_DPI 600
+    #define FP_POINTING_DEFAULT_DPI 1000
 #endif
 #define FP_POINTING_SCROLLING_DPI 10
 
@@ -18,5 +18,3 @@
 #define TAPPPING_TERM 120
 #define FP_SUPER_TAB_TIMEOUT 750
 #define ONESHOT_TIMEOUT 1000
-
-// void toggle_accel(void);
