@@ -19,4 +19,4 @@
 #define FP_SUPER_TAB_TIMEOUT 750
 #define ONESHOT_TIMEOUT 1000
 
-void toggle_accel(void);
+// void toggle_accel(void);
