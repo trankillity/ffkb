@@ -206,12 +206,12 @@ __attribute__((weak)) report_mouse_t pointing_device_task_keymap(report_mouse_t 
 
 // Max Extended Value: 32767
 
-// int sign(int x) {
-//     return (x > 0) - (x < 0);
-// }
+int sign(int x) {
+    return (x > 0) - (x < 0);
+}
 
-// static uint16_t crv_limit = 12000;
-// static uint8_t min_clamp = 1;
+static uint16_t crv_limit = 12000;
+static uint8_t min_clamp = 1;
 
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     mouse_xy_report_t x = mouse_report.x, y = mouse_report.y;
@@ -219,10 +219,10 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
         mouse_report.x = 0;
         mouse_report.y = 0;
 
-        // x = (mouse_xy_report_t)(abs(x) > crv_limit - min_clamp || x == 0 ? (abs(x) / crv_limit) * x + (min_clamp * sign(x)) : x);
-        // y = (mouse_xy_report_t)(abs(y) > crv_limit - min_clamp || y == 0 ? (abs(y) / crv_limit) * y + (min_clamp * sign(y)) : y);
-        x = (mouse_xy_report_t)(x > 0 ? x * x / 16 + x : -x * x / 16 + x);
-        y = (mouse_xy_report_t)(y > 0 ? y * y / 16 + y : -y * y / 16 + y);
+        x = (mouse_xy_report_t)(abs(x) > crv_limit - min_clamp || x == 0 ? (abs(x) / crv_limit) * x + (min_clamp * sign(x)) : x);
+        y = (mouse_xy_report_t)(abs(y) > crv_limit - min_clamp || y == 0 ? (abs(y) / crv_limit) * y + (min_clamp * sign(y)) : y);
+        // x = (mouse_xy_report_t)(x > 0 ? x * x / 16 + x : -x * x / 16 + x);
+        // y = (mouse_xy_report_t)(y > 0 ? y * y / 16 + y : -y * y / 16 + y);
     }
 
     mouse_report.x = x;
