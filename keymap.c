@@ -30,6 +30,7 @@ enum layer_names {
 #define C_DSKT      G(KC_TAB)
 #define C_SCRL      FP_SCROLL_MOMENT
 #define C_ZOOM      FP_ZOOM_MOMENT
+#define C_ACCL      FP_ACCEL_TOG
 
 #define OSM_SFT     OSM(MOD_LSFT)
 #define OSM_CTL     OSM(MOD_LCTL)
@@ -68,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_NAVI] = LAYOUT_ffkb(
-    KC_NO,      KC_INS,     KC_HOME,    KC_UP,      KC_END,     KC_PGUP,            KC_ESC,     C_STAB,     _______,    C_DSKT,     _______,    KC_BSLS,
+    C_ACCL,     KC_INS,     KC_HOME,    KC_UP,      KC_END,     KC_PGUP,            KC_ESC,     C_STAB,     _______,    C_DSKT,     _______,    KC_BSLS,
     C_TABI,     C_SELA,     KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_PGDN,            KC_VOLU,    OSM_SFT,    OSM_CTL,    OSM_ALT,    OSM_GUI,    C_TABD,
     KC_NO,      C_UNDO,     C_CUT,      C_COPY,     C_PAST,     C_REDO,             KC_VOLD,    KC_MPRV,    KC_MPLY,    KC_MNXT,    KC_MSTP,    KC_MUTE,
                             _______,    _______,    _______,    KC_DEL,             _______,    _______,    _______,    _______
