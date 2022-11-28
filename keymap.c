@@ -5,15 +5,30 @@ enum layer_names {
     _BASE,
     _NUMB,
     _NAVI,
+    _MOUS,
     _COMB
+};
+
+enum custom_keycodes {
+    C_DBLC = SAFE_RANGE,
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+    case C_DBLC:
+        if (record->event.pressed) {
+            tap_code_delay(KC_BTN1, 50);
+            tap_code(K_BTN1);
+        }
+        break;
+    }
+    return true;
 };
 
 #include "config.h"
 #include "g/keymap_combo.h"
 
 #define COMBO_ONLY_FROM_LAYER _COMB
-
-#define ___ KC_TRNS
 
 #define C_SELA      C(KC_A)
 #define C_UNDO      C(KC_Z)
@@ -22,8 +37,6 @@ enum layer_names {
 #define C_PAST      C(KC_V)
 #define C_REDO      C(KC_Y)
 
-#define C_CLFT      C(KC_LEFT)
-#define C_CRGT      C(KC_RIGHT)
 #define C_TABI      KC_TAB
 #define C_TABD      S(KC_TAB)
 #define C_STAB      FP_SUPER_TAB
@@ -31,6 +44,7 @@ enum layer_names {
 #define C_SCRL      FP_SCROLL_MOMENT
 #define C_ZOOM      FP_ZOOM_MOMENT
 #define C_ACCL      FP_ACCEL_TOG
+#define C_MLTG      TO(_BASE)
 
 #define OSM_SFT     OSM(MOD_LSFT)
 #define OSM_CTL     OSM(MOD_LCTL)
@@ -73,6 +87,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     C_TABI,     C_SELA,     KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_PGDN,            KC_VOLU,    OSM_SFT,    OSM_CTL,    OSM_ALT,    OSM_GUI,    C_TABD,
     KC_NO,      C_UNDO,     C_CUT,      C_COPY,     C_PAST,     C_REDO,             KC_VOLD,    KC_MPRV,    KC_MPLY,    KC_MNXT,    KC_MSTP,    KC_MUTE,
                             _______,    _______,    _______,    KC_DEL,             _______,    _______,    _______,    _______
+),
+
+[_MOUS] = LAYOUT_ffkb(
+    _______,    C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     _______,
+    _______,    C_MLTG,     KC_BTN3,    KC_BTN2,    KC_BTN1,    C_DBLC,             C_DBLC,     KC_BTN1,    KC_BTN2,    KC_BTN3,    C_MLTG,     _______,
+    _______,    C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     _______,
+                            _______,    _______,    _______,    _______,            _______,    _______,    _______,    _______
 ),
 
 // Combo layer. Never to be activated, just used or combo indexing purposes.
