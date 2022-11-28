@@ -15,12 +15,13 @@ enum custom_keycodes {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-    case C_DBLC:
-        if (record->event.pressed) {
-            tap_code_delay(KC_BTN1, 50);
-            tap_code(KC_BTN1);
-        }
-        break;
+        case C_DBLC:
+            if (record->event.pressed) {
+                tap_code(KC_BTN1);
+            } else {
+                tap_code(KC_BTN1);
+            }
+            return false;
     }
     return true;
 };
