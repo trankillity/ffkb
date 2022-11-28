@@ -25,7 +25,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case C_MLTG:
             if (record->event.pressed) {
-                tap_code(TO(_BASE));
+                layer_off(_BASE);
                 return true;
             }
     }
