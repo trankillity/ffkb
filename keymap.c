@@ -11,6 +11,7 @@ enum layer_names {
 
 enum custom_keycodes {
     C_DBLC = SAFE_RANGE,
+    C_MLTG
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -22,6 +23,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code(KC_BTN1);
             }
             return false;
+        case C_MLTG:
+            if (record->event.pressed) {
+                tap_code(TO(_BASE));
+                return true;
+            }
     }
     return true;
 };
@@ -45,7 +51,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #define C_SCRL      FP_SCROLL_MOMENT
 #define C_ZOOM      FP_ZOOM_MOMENT
 #define C_ACCL      FP_ACCEL_TOG
-#define C_MLTG      TO(_BASE)
+// #define C_MLTG      TO(_BASE)
 
 #define OSM_SFT     OSM(MOD_LSFT)
 #define OSM_CTL     OSM(MOD_LCTL)
