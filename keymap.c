@@ -18,7 +18,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case C_DBLC:
         if (record->event.pressed) {
             tap_code_delay(KC_BTN1, 50);
-            tap_code(K_BTN1);
+            tap_code(KC_BTN1);
         }
         break;
     }
