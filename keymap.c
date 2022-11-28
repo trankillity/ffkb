@@ -14,24 +14,6 @@ enum custom_keycodes {
     C_MLTG
 };
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case C_DBLC:
-            if (record->event.pressed) {
-                tap_code(KC_BTN1);
-            } else {
-                tap_code(KC_BTN1);
-            }
-            return false;
-        case C_MLTG:
-            if (record->event.pressed) {
-                layer_off(_BASE);
-                return true;
-            }
-    }
-    return true;
-};
-
 #include "config.h"
 #include "g/keymap_combo.h"
 
@@ -51,7 +33,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #define C_SCRL      FP_SCROLL_MOMENT
 #define C_ZOOM      FP_ZOOM_MOMENT
 #define C_ACCL      FP_ACCEL_TOG
-// #define C_MLTG      TO(_BASE)
 
 #define OSM_SFT     OSM(MOD_LSFT)
 #define OSM_CTL     OSM(MOD_LCTL)
@@ -100,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,    C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     _______,
     _______,    C_MLTG,     KC_BTN3,    KC_BTN2,    KC_BTN1,    C_DBLC,             C_DBLC,     KC_BTN1,    KC_BTN2,    KC_BTN3,    C_MLTG,     _______,
     _______,    C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     _______,
-                            _______,    _______,    _______,    _______,            _______,    _______,    _______,    _______
+                            _______,    C_MLTG,     _______,    C_MLTG,             C_MLTG,     C_MLTG,     C_MLTG,     _______
 ),
 
 // Combo layer. Never to be activated, just used or combo indexing purposes.
@@ -118,6 +99,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                             _______,    _______,    _______,    _______,            _______,    _______,    _______,    _______
 // ),
 
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case C_DBLC:
+            if (record->event.pressed) {
+                tap_code(KC_BTN1);
+            } else {
+                tap_code(KC_BTN1);
+            }
+            return false;
+        case C_MLTG:
+            if (record->event.pressed) {
+                layer_off(_BASE);
+                return true;
+            }
+    }
+    return true;
 };
 
 const key_override_t comma_override = ko_make_basic(MOD_MASK_SHIFT, KC_COMMA, KC_SCLN);
