@@ -37,10 +37,23 @@ jobs:
 
     - name: Build firmware (Cirque)
       run: make fingerpunch/ffkb_byomcu/v3:${{ github.actor }} CIRQUE_ENABLE=yes CONVERT_TO=stemcell
-    - name: Archive firmware
+    - name: Archive firmware (Cirque)
       uses: actions/upload-artifact@v3
       with:
         name: ffkb_v3_${{ github.actor }}_cirque
+        retention-days: 5
+        path: |
+          *.hex
+          *.bin
+          *.uf2
+      continue-on-error: true
+
+    - name: Build firmware (Both)
+      run: make fingerpunch/ffkb_byomcu/v3:${{ github.actor }} CIRQUE_ENABLE=yes FP_TRACKBALL_ENABLE=yes CONVERT_TO=stemcell
+    - name: Archive firmware (Both)
+      uses: actions/upload-artifact@v3
+      with:
+        name: ffkb_v3_${{ github.actor }}_trackball-cirque
         retention-days: 5
         path: |
           *.hex
