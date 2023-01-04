@@ -22,13 +22,25 @@ jobs:
       with:
         path: keyboards/fingerpunch/ffkb_byomcu/v3/keymaps/${{ github.actor }}
 
-    - name: Build firmware
+    - name: Build firmware (Trackball)
       run: make fingerpunch/ffkb_byomcu/v3:${{ github.actor }} FP_TRACKBALL_ENABLE=yes CONVERT_TO=stemcell
+    - name: Archive firmware (Trackball)
+      uses: actions/upload-artifact@v3
+      with:
+        name: ffkb_v3_${{ github.actor }}_trackball
+        retention-days: 5
+        path: |
+          *.hex
+          *.bin
+          *.uf2
+      continue-on-error: true
 
+    - name: Build firmware (Cirque)
+      run: make fingerpunch/ffkb_byomcu/v3:${{ github.actor }} CIRQUE_ENABLE=yes CONVERT_TO=stemcell
     - name: Archive firmware
       uses: actions/upload-artifact@v3
       with:
-        name: ffkb_v3_${{ github.actor }}
+        name: ffkb_v3_${{ github.actor }}_cirque
         retention-days: 5
         path: |
           *.hex
