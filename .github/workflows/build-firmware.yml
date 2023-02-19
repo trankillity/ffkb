@@ -20,15 +20,14 @@ jobs:
     - name: Checkout keymap
       uses: actions/checkout@v3
       with:
-        path: keyboards/fingerpunch/ffkb_byomcu/v3/keymaps/${{ github.actor }}
+        path: keyboards/fingerpunch/ffkb_byomcu/v2/keymaps/${{ github.actor }}
 
     - name: Build firmware
-      run: make fingerpunch/ffkb_byomcu/v3:${{ github.actor }} FP_TRACKBALL_ENABLE=yes CONVERT_TO=stemcell
-
+      run: make fingerpunch/ffkb_byomcu/v2:${{ github.actor }} CIRQUE_ENABLE=yes FP_TRACKBALL_ENABLE=no RGBLIGHT_ENABLE=yes CONVERT_TO=stemcell
     - name: Archive firmware
       uses: actions/upload-artifact@v3
       with:
-        name: ffkb_v3_${{ github.actor }}
+        name: ffkb_v2_${{ github.actor }}
         retention-days: 5
         path: |
           *.hex
