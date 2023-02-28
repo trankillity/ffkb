@@ -20,10 +20,10 @@ jobs:
     - name: Checkout keymap
       uses: actions/checkout@v3
       with:
-        path: keyboards/fingerpunch/ffkb_byomcu/v3/keymaps/${{ github.actor }}
+        path: keyboards/fingerpunch/ffkb/byomcu/v3/keymaps/${{ github.actor }}
 
     - name: Build firmware
-      run: make fingerpunch/ffkb_byomcu/v3:${{ github.actor }} FP_TRACKBALL_ENABLE=yes CONVERT_TO=stemcell
+      run: make fingerpunch/ffkb/byomcu/v3:${{ github.actor }} FP_TRACKBALL_ENABLE=yes CONVERT_TO=stemcell
 
     - name: Archive firmware
       uses: actions/upload-artifact@v3
