@@ -30,9 +30,10 @@ enum custom_keycodes {
 #define C_TABD      S(KC_TAB)
 #define C_STAB      FP_SUPER_TAB
 #define C_DSKT      G(KC_TAB)
-#define C_SCRL      FP_SCROLL_MOMENT
-#define C_ZOOM      FP_ZOOM_MOMENT
+#define C_SCRL      FP_SCROLL_TOG
+#define C_ZOOM      FP_ZOOM_TOG
 #define C_ACCL      FP_ACCEL_TOG
+#define C_CENT      C(KC_ENTER)
 
 #define OSM_SFT     OSM(MOD_LSFT)
 #define OSM_CTL     OSM(MOD_LCTL)
@@ -57,9 +58,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_BASE] = LAYOUT_ffkb(
-    C_SCRL,     KC_Q,       KC_W,       KC_F,       KC_P,       KC_B,               KC_J,       KC_L,       KC_U,       KC_Y,       KC_QUOT,    C_ZOOM,
+    QK_GESC,    KC_Q,       KC_W,       KC_F,       KC_P,       KC_B,               KC_J,       KC_L,       KC_U,       KC_Y,       KC_QUOT,    KC_BSLS,
     C_TABI,     KC_A,       KC_R,       KC_S,       KC_T,       KC_G,               KC_M,       KC_N,       KC_E,       KC_I,       KC_O,       C_TABD,
-    OSM_CTL,    KC_Z,       KC_X,       KC_C,       KC_D,       KC_V,               KC_K,       KC_H,       KC_COMM,    KC_DOT,     KC_SLSH,    OSM_CTL,
+    OSM_CTL,    KC_Z,       KC_X,       KC_C,       KC_D,       KC_V,               KC_K,       KC_H,       KC_COMM,    KC_DOT,     KC_SLSH,    C_CENT,
                             KC_NO,      OSL_NUM,    OSM_SFT,    KC_BSPC,            KC_ENTER,   KC_SPC,     OSL_NAV,    KC_NO
 ),
 
@@ -78,9 +79,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_MOUS] = LAYOUT_ffkb(
-    _______,    C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     _______,
-    _______,    C_MLTG,     KC_BTN3,    KC_BTN2,    KC_BTN1,    C_DBLC,             C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     _______,
-    _______,    C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     _______,
+    C_SCRL,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     _______,
+    C_ZOOM,     C_MLTG,     KC_BTN3,    KC_BTN2,    KC_BTN1,    C_DBLC,             C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     _______,
+    C_ACCL,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     _______,
                             _______,    C_MLTG,     _______,    C_MLTG,             C_MLTG,     C_MLTG,     C_MLTG,     _______
 ),
 
@@ -118,6 +119,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
 };
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    switch (get_highest_layer(state)) {
+        default:
+            fp_zoom_keycode_set(false);
+            fp_scroll_keycode_set(false);
+            break;
+    }
+    return state;
+}
 
 const key_override_t comma_override = ko_make_basic(MOD_MASK_SHIFT, KC_COMMA, KC_SCLN);
 const key_override_t fstop_override = ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_COLON);
