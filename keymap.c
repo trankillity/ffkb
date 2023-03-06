@@ -121,11 +121,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 };
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    switch (get_highest_layer(state)) {
-        _BASE:
-            fp_zoom_keycode_set(false);
-            fp_scroll_keycode_set(false);
-            break;
+    if (get_highest_layer(state) != _MOUS) {
+        fp_zoom_keycode_set(false);
+        fp_scroll_keycode_set(false);
     }
     return state;
 }
