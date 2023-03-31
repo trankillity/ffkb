@@ -139,7 +139,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         case C_XCSE: {
             if (record->event.pressed) {
-                enable_xcase_with();
+                enable_xcase();
             }            
             return false;
         }
