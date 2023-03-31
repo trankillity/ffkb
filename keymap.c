@@ -14,11 +14,15 @@ enum custom_keycodes {
     C_MLTG,
     C_SCRL,
     C_ZOOM,
-    C_ACCL
+    C_CAPW,
+    C_SNKC,
+    C_KEBC,
+    C_XCSE
 };
 
 #include "config.h"
 #include "g/keymap_combo.h"
+#include "features/casemodes.h"
 
 #define COMBO_ONLY_FROM_LAYER _COMB
 
@@ -66,21 +70,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_BASE] = LAYOUT_ffkb(
-    QK_GESC,    KC_Q,       KC_W,       KC_F,       KC_P,       KC_B,               KC_J,       KC_L,       KC_U,       KC_Y,       KC_QUOT,    KC_BSLS,
+    KC_ESC,     KC_Q,       KC_W,       KC_F,       KC_P,       KC_B,               KC_J,       KC_L,       KC_U,       KC_Y,       KC_QUOT,    KC_BSLS,
     C_TABI,     KC_A,       KC_R,       KC_S,       KC_T,       KC_G,               KC_M,       KC_N,       KC_E,       KC_I,       KC_O,       C_TABD,
     OSM_CTL,    KC_Z,       KC_X,       KC_C,       KC_D,       KC_V,               KC_K,       KC_H,       KC_COMM,    KC_DOT,     KC_SLSH,    C_CENT,
                             KC_NO,      OSL_NUM,    OSM_SFT,    KC_BSPC,            KC_ENTER,   KC_SPC,     OSL_NAV,    KC_NO
 ),
 
 [_NUMB] = LAYOUT_ffkb(
-    KC_F6,      KC_F5,      KC_F4,      KC_F3,      KC_F2,      KC_F1,              KC_EQL,     KC_7,       KC_8,       KC_9,       KC_DOT,     KC_EXLM,
+    KC_F6,      KC_F5,      KC_F4,      KC_F3,      KC_F2,      KC_F1,              KC_EQL,     KC_7,       KC_8,       KC_9,       KC_DOT,     KC_COMM,
     C_TABI,     OSM_GUI,    OSM_ALT,    OSM_CTL,    OSM_SFT,    _______,            KC_PPLS,    KC_4,       KC_5,       KC_6,       KC_PAST,    KC_GRV,
     KC_F12,     KC_F11,     KC_F10,     KC_F9,      KC_F8,      KC_F7,              KC_MINS,    KC_1,       KC_2,       KC_3,       KC_SLSH,    KC_UNDS,
                             _______,    _______,    _______,    _______,            _______,    _______,    KC_0,       _______
 ),
 
 [_NAVI] = LAYOUT_ffkb(
-    KC_NO,      KC_INS,     KC_HOME,    KC_UP,      KC_END,     KC_PGUP,            KC_ESC,     C_STBI,     C_STBD,     C_DSKT,     _______,    KC_BSLS,
+    KC_NO,      KC_INS,     KC_HOME,    KC_UP,      KC_END,     KC_PGUP,            KC_ESC,     C_STBI,     C_STBD,     C_DSKT,     _______,    _______,
     C_TABI,     C_SELA,     KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_PGDN,            KC_VOLU,    OSM_SFT,    OSM_CTL,    OSM_ALT,    OSM_GUI,    C_TABD,
     KC_NO,      C_UNDO,     C_CUT,      C_COPY,     C_PAST,     C_REDO,             KC_VOLD,    KC_MPRV,    KC_MPLY,    KC_MNXT,    KC_MSTP,    KC_MUTE,
                             _______,    _______,    _______,    KC_DEL,             _______,    _______,    _______,    _______
@@ -89,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_MOUS] = LAYOUT_ffkb(
     C_SCRL,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_ACCL,
     C_ZOOM,     C_MLTG,     KC_BTN3,    KC_BTN2,    KC_BTN1,    C_DBLC,             C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_ACCL,
-    _______,    C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_ACCL,
+    OSM_CTL,    C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_ACCL,
                             _______,    C_MLTG,     _______,    C_MLTG,             C_MLTG,     C_MLTG,     C_MLTG,     _______
 ),
 
@@ -111,7 +115,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (!process_case_modes(keycode, record)) {
+        return false;
+    }
     switch (keycode) {
+        case C_CAPW: {
+            if (record->event.pressed) {
+                enable_caps_word();
+            }
+            return false;
+        }
+        case C_SNKC: {
+            if (record->event.pressed) {
+                enable_xcase_with(KC_UNDS);
+            }            
+            return false;
+        }
+        case C_KEBC: {
+            if (record->event.pressed) {
+                enable_xcase_with(KC_MINUS);
+            }            
+            return false;
+        }
+        case C_XCSE: {
+            if (record->event.pressed) {
+                enable_xcase_with();
+            }            
+            return false;
+        }
         case C_DBLC:
             if (record->event.pressed) {
                 tap_code(KC_BTN1);
@@ -141,7 +172,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             } else {
                 fp_zoom_keycode_set(false);
             }
-            return false;            
+            return false;
+        default:
+            return true;
     }
     return true;
 };
