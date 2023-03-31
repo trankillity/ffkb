@@ -4,4 +4,4 @@ KEY_OVERRIDE_ENABLE = yes
 
 VPATH += keyboards/gboards
 VPATH += keyboards/casemodes
-# SRC += casemodes/features/casemodes.c
+SRC += features/casemodes.c
