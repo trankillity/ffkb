@@ -22,7 +22,7 @@ enum custom_keycodes {
 
 #include "config.h"
 #include "g/keymap_combo.h"
-#include "caesmodes/features/casemodes.h"
+#include "features/casemodes.h"
 
 #define COMBO_ONLY_FROM_LAYER _COMB
 
