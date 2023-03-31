@@ -17,16 +17,16 @@ jobs:
         # ref: develop_qmk
         submodules: true
     
-    - name: Checkout Case Modes
-      uses: actions/checkout@v3
-      with:
-        repository: andrewjrae/kyria-keymap
-        path: keyboards/fingerpunch/ffkb/byomcu/v3/keymaps/${{ github.actor }}
-
     - name: Checkout keymap
       uses: actions/checkout@v3
       with:
         path: keyboards/fingerpunch/ffkb/byomcu/v3/keymaps/${{ github.actor }}
+
+    - name: Checkout Case Modes
+      uses: actions/checkout@v3
+      with:
+        repository: andrewjrae/kyria-keymap
+        path: keyboards/fingerpunch/ffkb/byomcu/v3/keymaps/${{ github.actor }}/casemodes
 
     - name: Build firmware
       run: make fingerpunch/ffkb/byomcu/v3:${{ github.actor }} FP_TRACKBALL_ENABLE=yes CONVERT_TO=stemcell
