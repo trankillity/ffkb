@@ -3,4 +3,5 @@ COMBO_ENABLE = yes
 KEY_OVERRIDE_ENABLE = yes
 
 VPATH += keyboards/gboards
-SRC += casemodes/features/casemodes.c
+VPATH += keyboards/casemodes
+# SRC += casemodes/features/casemodes.c

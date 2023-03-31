@@ -22,7 +22,7 @@ enum custom_keycodes {
 
 #include "config.h"
 #include "g/keymap_combo.h"
-#include "caesmodes/features/casemodes.h"
+// #include "caesmodes/features/casemodes.h"
 
 #define COMBO_ONLY_FROM_LAYER _COMB
 
@@ -115,34 +115,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (!process_case_modes(keycode, record)) {
-        return false;
-    }
+    // if (!process_case_modes(keycode, record)) {
+    //     return false;
+    // }
     switch (keycode) {
-        case C_CAPW: {
-            if (record->event.pressed) {
-                enable_caps_word();
-            }
-            return false;
-        }
-        case C_SNKC: {
-            if (record->event.pressed) {
-                enable_xcase_with(KC_UNDS);
-            }            
-            return false;
-        }
-        case C_KEBC: {
-            if (record->event.pressed) {
-                enable_xcase_with(KC_MINUS);
-            }            
-            return false;
-        }
-        case C_XCSE: {
-            if (record->event.pressed) {
-                enable_xcase_with();
-            }            
-            return false;
-        }
+        // case C_CAPW: {
+        //     if (record->event.pressed) {
+        //         enable_caps_word();
+        //     }
+        //     return false;
+        // }
+        // case C_SNKC: {
+        //     if (record->event.pressed) {
+        //         enable_xcase_with(KC_UNDS);
+        //     }            
+        //     return false;
+        // }
+        // case C_KEBC: {
+        //     if (record->event.pressed) {
+        //         enable_xcase_with(KC_MINUS);
+        //     }            
+        //     return false;
+        // }
+        // case C_XCSE: {
+        //     if (record->event.pressed) {
+        //         enable_xcase_with();
+        //     }            
+        //     return false;
+        // }
         case C_DBLC:
             if (record->event.pressed) {
                 tap_code(KC_BTN1);
