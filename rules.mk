@@ -3,5 +3,5 @@ COMBO_ENABLE = yes
 KEY_OVERRIDE_ENABLE = yes
 
 VPATH += keyboards/gboards
-VPATH += keyboards/casemodes
-SRC += features/casemodes.c
+VPATH += keyboards/splitkb/kyria/keymaps/andrewjrae/features
+SRC += casemodes.c

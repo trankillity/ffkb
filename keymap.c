@@ -152,7 +152,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case C_MLTG:
             if (record->event.pressed) {
-                layer_off(_BASE);
+                layer_off(_MOUS);
                 return true;
             }
         case C_SCRL:
