@@ -12,8 +12,8 @@ enum layer_names {
 enum custom_keycodes {
     C_DBLC = SAFE_RANGE,
     C_MLTG,
-    C_SCRL,
-    C_ZOOM,
+    // C_SCRL,
+    // C_ZOOM,
     C_CAPW,
     C_SNKC,
     C_KEBC,
@@ -40,6 +40,8 @@ enum custom_keycodes {
 #define C_DSKT      G(KC_TAB)
 #define C_ACCL      FP_ACCEL_TOG
 #define C_CENT      C(KC_ENTER)
+#define C_SCRL      LT(0,KC_S)
+#define C_ZOOM      LT(0,KC_Z)
 
 // Data Grip Shortcuts
 #define D_FMTC      C(A(KC_L))
