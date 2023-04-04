@@ -42,6 +42,7 @@ enum custom_keycodes {
 #define C_CENT      C(KC_ENTER)
 #define C_SCRL      LT(0,KC_S)
 #define C_ZOOM      LT(0,KC_Z)
+#define C_MTOG      TG(_MOUS)
 
 // Data Grip Shortcuts
 #define D_FMTC      C(A(KC_L))
@@ -93,9 +94,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_MOUS] = LAYOUT_ffkb(
-    C_SCRL,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_ACCL,
-    C_ZOOM,     C_MLTG,     KC_BTN3,    KC_BTN2,    KC_BTN1,    C_DBLC,             C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_ACCL,
-    OSM_CTL,    C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_ACCL,
+    C_SCRL,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MTOG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_ACCL,
+    C_ZOOM,     C_MLTG,     KC_BTN3,    KC_BTN2,    KC_BTN1,    C_DBLC,             C_MTOG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_ACCL,
+    OSM_CTL,    C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MTOG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_ACCL,
                             _______,    C_MLTG,     _______,    C_MLTG,             C_MLTG,     C_MLTG,     C_MLTG,     _______
 ),
 
@@ -115,6 +116,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ),
 
 };
+
+bool is_mouse_record_user(uint16_t keycode, keyrecord_t* record) {
+    switch(keycode) {
+        case C_DBLC:
+        case C_SCRL:
+        case C_ZOOM:
+            return true;
+        default:
+            return false;
+    }
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_case_modes(keycode, record)) {
@@ -162,7 +174,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 fp_scroll_keycode_toggle();
             } else if (record->event.pressed) {
                 fp_scroll_keycode_set(true);
-            } else {
+            } else if (!record->tap.count) {
                 fp_scroll_keycode_set(false);
             }
             return false;
@@ -171,7 +183,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 fp_zoom_keycode_toggle();
             } else if (record->event.pressed) {
                 fp_zoom_keycode_set(true);
-            } else {
+            } else if (!record->tap.count) {
                 fp_zoom_keycode_set(false);
             }
             return false;
