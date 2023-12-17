@@ -1,31 +1,34 @@
 #include QMK_KEYBOARD_H
 
+#include "config.h"
+#include "g/keymap_combo.h"
+// #include "casemodes.h"
+
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
     _BASE,
     _NUMB,
     _NAVI,
-    _MOUS,
+    // _MOUS,
+    _SYST,
     _COMB
 };
 
-enum custom_keycodes {
-    C_DBLC = SAFE_RANGE,
-    C_MLTG,
-    // C_SCRL,
-    // C_ZOOM,
-    C_CAPW,
-    C_SNKC,
-    C_KEBC,
-    C_XCSE
-};
+// enum custom_keycodes {
+//     C_DBLC = SAFE_RANGE,
+//     C_MLTG,
+//     // C_SCRL,
+//     // C_ZOOM,
+//     C_CAPW,
+//     C_SNKC,
+//     C_KEBC,
+//     C_XCSE
+// };
 
-#include "config.h"
-#include "g/keymap_combo.h"
-#include "casemodes.h"
 
 #define COMBO_ONLY_FROM_LAYER _COMB
 
+// General Shortcuts
 #define C_SELA      C(KC_A)
 #define C_UNDO      C(KC_Z)
 #define C_CUT       C(KC_X)
@@ -33,6 +36,7 @@ enum custom_keycodes {
 #define C_PAST      C(KC_V)
 #define C_REDO      C(KC_Y)
 
+#define C_SNIP      G(S(KC_S))
 #define C_TABI      KC_TAB
 #define C_TABD      S(KC_TAB)
 #define C_STBI      FP_SUPER_TAB
@@ -40,9 +44,6 @@ enum custom_keycodes {
 #define C_DSKT      G(KC_TAB)
 #define C_ACCL      FP_ACCEL_TOG
 #define C_CENT      C(KC_ENTER)
-#define C_SCRL      LT(0,KC_S)
-#define C_ZOOM      LT(0,KC_Z)
-#define C_MTOG      TG(_MOUS)
 
 // Data Grip Shortcuts
 #define D_FMTC      C(A(KC_L))
@@ -50,6 +51,17 @@ enum custom_keycodes {
 #define D_COLS      A(S(KC_INS))
 #define D_NEWF      A(KC_INS)
 
+
+// Fingerpunch Shortcuts
+#define F_DPRS      FP_POINT_DPI_RESET
+#define F_DPUP      FP_POINT_DPI_UP
+#define F_DPDN      FP_POINT_DPI_DN
+#define F_SCRS      FP_SCROLL_DPI_RESET
+#define F_SCUP      FP_SCROLL_DPI_UP
+#define F_SCDN      FP_SCROLL_DPI_DN
+#define F_ACTG      FP_ACCEL_TOG
+
+// Oneshots
 #define OSM_SFT     OSM(MOD_LSFT)
 #define OSM_CTL     OSM(MOD_LCTL)
 #define OSM_ALT     OSM(MOD_LALT)
@@ -76,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC,     KC_Q,       KC_W,       KC_F,       KC_P,       KC_B,               KC_J,       KC_L,       KC_U,       KC_Y,       KC_QUOT,    KC_BSLS,
     C_TABI,     KC_A,       KC_R,       KC_S,       KC_T,       KC_G,               KC_M,       KC_N,       KC_E,       KC_I,       KC_O,       C_TABD,
     OSM_CTL,    KC_Z,       KC_X,       KC_C,       KC_D,       KC_V,               KC_K,       KC_H,       KC_COMM,    KC_DOT,     KC_SLSH,    C_CENT,
-                            KC_NO,      OSL_NUM,    OSM_SFT,    KC_BSPC,            KC_ENTER,   KC_SPC,     OSL_NAV,    KC_NO
+                            KC_NO,      MO(_NUMB),  OSM_SFT,    KC_BSPC,            KC_ENTER,   KC_SPC,     MO(_NAVI),  KC_NO
 ),
 
 [_NUMB] = LAYOUT_ffkb(
@@ -87,18 +99,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_NAVI] = LAYOUT_ffkb(
-    KC_NO,      KC_INS,     KC_HOME,    KC_UP,      KC_END,     KC_PGUP,            KC_ESC,     C_STBI,     C_STBD,     C_DSKT,     _______,    _______,
+    KC_NO,      KC_INS,     KC_HOME,    KC_UP,      KC_END,     KC_PGUP,            KC_ESC,     C_STBI,     C_STBD,     C_DSKT,     _______,    TO(_SYST),
     C_TABI,     C_SELA,     KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_PGDN,            KC_VOLU,    OSM_SFT,    OSM_CTL,    OSM_ALT,    OSM_GUI,    C_TABD,
     KC_NO,      C_UNDO,     C_CUT,      C_COPY,     C_PAST,     C_REDO,             KC_VOLD,    KC_MPRV,    KC_MPLY,    KC_MNXT,    KC_MSTP,    KC_MUTE,
                             _______,    _______,    _______,    KC_DEL,             _______,    _______,    _______,    _______
 ),
 
-[_MOUS] = LAYOUT_ffkb(
-    C_SCRL,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MTOG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_ACCL,
-    C_ZOOM,     C_MLTG,     KC_BTN3,    KC_BTN2,    KC_BTN1,    C_DBLC,             C_MTOG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_ACCL,
-    OSM_CTL,    C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MTOG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_ACCL,
-                            _______,    C_MLTG,     _______,    C_MLTG,             C_MLTG,     C_MLTG,     C_MLTG,     _______
+[_SYST] = LAYOUT_ffkb(
+    _______,    RGB_TOG,    RGB_RMOD,   RGB_MOD,    _______,    TO(_BASE),          _______,    F_DPRS,     F_SCRS,     _______,    _______,    TO(_BASE),
+    _______,    RGB_SPI,    RGB_HUI,    RGB_SAI,    RGB_VAI,    _______,            F_ACTG,     F_DPUP,     F_SCUP,     _______,    _______,    _______,
+    _______,    RGB_SPD,    RGB_HUD,    RGB_SAD,    RGB_VAD,    _______,            _______,    F_DPDN,     F_SCDN,     _______,    QK_BOOT,    _______,
+                            _______,    _______,    _______,    _______,            _______,    _______,    _______,    _______
 ),
+
+// [_MOUS] = LAYOUT_ffkb(
+//     C_SCRL,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MTOG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_ACCL,
+//     C_ZOOM,     C_MLTG,     KC_BTN3,    KC_BTN2,    KC_BTN1,    C_DBLC,             C_MTOG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_ACCL,
+//     OSM_CTL,    C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MTOG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_ACCL,
+//                             _______,    C_MLTG,     _______,    C_MLTG,             C_MLTG,     C_MLTG,     C_MLTG,     _______
+// ),
 
 // Combo layer. Never to be activated, just used or combo indexing purposes.
 [_COMB] = LAYOUT_ffkb(
@@ -117,91 +136,91 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-bool is_mouse_record_user(uint16_t keycode, keyrecord_t* record) {
-    switch(keycode) {
-        case C_DBLC:
-        case C_SCRL:
-        case C_ZOOM:
-            return true;
-        default:
-            return false;
-    }
-}
+// bool is_mouse_record_user(uint16_t keycode, keyrecord_t* record) {
+//     switch(keycode) {
+//         case C_DBLC:
+//         case C_SCRL:
+//         case C_ZOOM:
+//             return true;
+//         default:
+//             return false;
+//     }
+// }
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (!process_case_modes(keycode, record)) {
-        return false;
-    }
-    switch (keycode) {
-        case C_CAPW: {
-            if (record->event.pressed) {
-                enable_caps_word();
-            }
-            return false;
-        }
-        case C_SNKC: {
-            if (record->event.pressed) {
-                enable_xcase_with(KC_UNDS);
-            }            
-            return false;
-        }
-        case C_KEBC: {
-            if (record->event.pressed) {
-                enable_xcase_with(KC_MINUS);
-            }            
-            return false;
-        }
-        case C_XCSE: {
-            if (record->event.pressed) {
-                enable_xcase();
-            }            
-            return false;
-        }
-        case C_DBLC:
-            if (record->event.pressed) {
-                tap_code(KC_BTN1);
-            } else {
-                tap_code(KC_BTN1);
-            }
-            return false;
-        case C_MLTG:
-            if (record->event.pressed) {
-                layer_off(_MOUS);
-                return true;
-            }
-        case C_SCRL:
-            if (record->tap.count && record->event.pressed) {
-                fp_scroll_keycode_toggle();
-            } else if (record->event.pressed) {
-                fp_scroll_keycode_set(true);
-            } else if (!record->tap.count) {
-                fp_scroll_keycode_set(false);
-            }
-            return false;
-        case C_ZOOM:
-            if (record->tap.count && record->event.pressed) {
-                fp_zoom_keycode_toggle();
-            } else if (record->event.pressed) {
-                fp_zoom_keycode_set(true);
-            } else if (!record->tap.count) {
-                fp_zoom_keycode_set(false);
-            }
-            return false;
-        default:
-            return true;
-    }
-    return true;
-};
+// bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+//     if (!process_case_modes(keycode, record)) {
+//         return false;
+//     }
+//     switch (keycode) {
+//         case C_CAPW: {
+//             if (record->event.pressed) {
+//                 enable_caps_word();
+//             }
+//             return false;
+//         }
+//         case C_SNKC: {
+//             if (record->event.pressed) {
+//                 enable_xcase_with(KC_UNDS);
+//             }            
+//             return false;
+//         }
+//         case C_KEBC: {
+//             if (record->event.pressed) {
+//                 enable_xcase_with(KC_MINUS);
+//             }            
+//             return false;
+//         }
+//         case C_XCSE: {
+//             if (record->event.pressed) {
+//                 enable_xcase();
+//             }            
+//             return false;
+//         }
+//         case C_DBLC:
+//             if (record->event.pressed) {
+//                 tap_code(KC_BTN1);
+//             } else {
+//                 tap_code(KC_BTN1);
+//             }
+//             return false;
+//         case C_MLTG:
+//             if (record->event.pressed) {
+//                 layer_off(_MOUS);
+//                 return true;
+//             }
+//         case C_SCRL:
+//             if (record->tap.count && record->event.pressed) {
+//                 fp_scroll_keycode_toggle();
+//             } else if (record->event.pressed) {
+//                 fp_scroll_keycode_set(true);
+//             } else if (!record->tap.count) {
+//                 fp_scroll_keycode_set(false);
+//             }
+//             return false;
+//         case C_ZOOM:
+//             if (record->tap.count && record->event.pressed) {
+//                 fp_zoom_keycode_toggle();
+//             } else if (record->event.pressed) {
+//                 fp_zoom_keycode_set(true);
+//             } else if (!record->tap.count) {
+//                 fp_zoom_keycode_set(false);
+//             }
+//             return false;
+//         default:
+//             return true;
+//     }
+//     return true;
+// };
 
-layer_state_t layer_state_set_user(layer_state_t state) {
-    if (get_highest_layer(state) != _MOUS) {
-        fp_zoom_layer_set(false);
-        fp_scroll_layer_set(false);
-        fp_zoom_keycode_set(false);
-        fp_scroll_keycode_set(false);
-    }
-    return state;
-}
+// layer_state_t layer_state_set_user(layer_state_t state) {
+//     if (get_highest_layer(state) != _MOUS) {
+//         fp_zoom_layer_set(false);
+//         fp_scroll_layer_set(false);
+//         fp_zoom_keycode_set(false);
+//         fp_scroll_keycode_set(false);
+//     }
+//     return state;
+// }
 
 const key_override_t comma_override = ko_make_basic(MOD_MASK_SHIFT, KC_COMMA, KC_SCLN);
 const key_override_t fstop_override = ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_COLON);
