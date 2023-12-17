@@ -19,8 +19,8 @@ COMB(eqal, KC_EQUAL, KC_F, KC_S)
 COMB(excl, KC_EXCLAIM, KC_U, KC_E)
 
 /* Functions */
-COMB(capw, C_CAPW, KC_G, KC_M)
-COMB(snkc, C_SNKC, KC_B, KC_J)
+//COMB(capw, C_CAPW, KC_G, KC_M)
+//COMB(snkc, C_SNKC, KC_B, KC_J)
 COMB(caps, KC_CAPS, KC_V, KC_K)
 
 /* System */
