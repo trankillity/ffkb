@@ -7,42 +7,24 @@
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
     _BASE,
-    _NUMB,
     _NAVI,
-    // _MOUS,
+    _MOUS,
+    _NUMB,
+    _FUNC,
     _SYST,
     _COMB
 };
 
-// enum custom_keycodes {
-//     C_DBLC = SAFE_RANGE,
-//     C_MLTG,
-//     // C_SCRL,
-//     // C_ZOOM,
-//     C_CAPW,
-//     C_SNKC,
-//     C_KEBC,
-//     C_XCSE
-// };
-
-
 #define COMBO_ONLY_FROM_LAYER _COMB
 
 // General Shortcuts
-#define C_SELA      C(KC_A)
-#define C_UNDO      C(KC_Z)
-#define C_CUT       C(KC_X)
-#define C_COPY      C(KC_C)
-#define C_PAST      C(KC_V)
-#define C_REDO      C(KC_Y)
-
 #define C_SNIP      G(S(KC_S))
 #define C_TABI      KC_TAB
 #define C_TABD      S(KC_TAB)
 #define C_STBI      FP_SUPER_TAB
 #define C_STBD      S(FP_SUPER_TAB)
 #define C_DSKT      G(KC_TAB)
-#define C_ACCL      FP_ACCEL_TOG
+// #define C_ACCL      FP_ACCEL_TOG
 #define C_CENT      C(KC_ENTER)
 
 // Data Grip Shortcuts
@@ -51,23 +33,18 @@ enum layer_names {
 #define D_COLS      A(S(KC_INS))
 #define D_NEWF      A(KC_INS)
 
-
 // Fingerpunch Shortcuts
-#define F_DPRS      FP_POINT_DPI_RESET
-#define F_DPUP      FP_POINT_DPI_UP
-#define F_DPDN      FP_POINT_DPI_DN
-#define F_SCRS      FP_SCROLL_DPI_RESET
-#define F_SCUP      FP_SCROLL_DPI_UP
-#define F_SCDN      FP_SCROLL_DPI_DN
-#define F_ACTG      FP_ACCEL_TOG
+// #define F_DPRS      FP_POINT_DPI_RESET
+// #define F_DPUP      FP_POINT_DPI_UP
+// #define F_DPDN      FP_POINT_DPI_DN
+// #define F_SCRS      FP_SCROLL_DPI_RESET
+// #define F_SCUP      FP_SCROLL_DPI_UP
+// #define F_SCDN      FP_SCROLL_DPI_DN
+// #define F_ACTG      FP_ACCEL_TOG
 
 // Oneshots
+#define MM(MOD,KEY) MT(MOD_##MOD,KC_##KEY)
 #define OSM_SFT     OSM(MOD_LSFT)
-#define OSM_CTL     OSM(MOD_LCTL)
-#define OSM_ALT     OSM(MOD_LALT)
-#define OSM_GUI     OSM(MOD_LGUI)
-#define OSL_NUM     OSL(_NUMB)
-#define OSL_NAV     OSL(_NAVI)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Base - Colemak
@@ -85,39 +62,55 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_BASE] = LAYOUT_ffkb(
-    KC_ESC,     KC_Q,       KC_W,       KC_F,       KC_P,       KC_B,               KC_J,       KC_L,       KC_U,       KC_Y,       KC_QUOT,    KC_BSLS,
-    C_TABI,     KC_A,       KC_R,       KC_S,       KC_T,       KC_G,               KC_M,       KC_N,       KC_E,       KC_I,       KC_O,       C_TABD,
-    OSM_CTL,    KC_Z,       KC_X,       KC_C,       KC_D,       KC_V,               KC_K,       KC_H,       KC_COMM,    KC_DOT,     KC_SLSH,    C_CENT,
+    KC_NO,      KC_Q,       KC_W,       KC_F,       KC_P,       KC_B,               KC_J,       KC_L,       KC_U,       KC_Y,       KC_QUOT,    KC_NO,
+    KC_NO,      KC_A,       KC_R,       KC_S,       KC_T,       KC_G,               KC_M,       KC_N,       KC_E,       KC_I,       KC_O,       KC_NO,
+    KC_NO,      MM(LGUI,Z), MM(LALT,X), MM(LSFT,C), MM(LCTL,D), KC_V,               KC_K,       KC_H,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_NO,
                             KC_NO,      MO(_NUMB),  OSM_SFT,    KC_BSPC,            KC_ENTER,   KC_SPC,     MO(_NAVI),  KC_NO
 ),
 
-[_NUMB] = LAYOUT_ffkb(
-    KC_F6,      KC_F5,      KC_F4,      KC_F3,      KC_F2,      KC_F1,              KC_EQL,     KC_7,       KC_8,       KC_9,       KC_DOT,     KC_COMM,
-    C_TABI,     OSM_GUI,    OSM_ALT,    OSM_CTL,    OSM_SFT,    _______,            KC_PPLS,    KC_4,       KC_5,       KC_6,       KC_PAST,    KC_GRV,
-    KC_F12,     KC_F11,     KC_F10,     KC_F9,      KC_F8,      KC_F7,              KC_MINS,    KC_1,       KC_2,       KC_3,       KC_SLSH,    KC_UNDS,
-                            _______,    _______,    _______,    _______,            _______,    _______,    KC_0,       _______
-),
-
 [_NAVI] = LAYOUT_ffkb(
-    KC_NO,      KC_INS,     KC_HOME,    KC_UP,      KC_END,     KC_PGUP,            KC_ESC,     C_STBI,     C_STBD,     C_DSKT,     _______,    TO(_SYST),
-    C_TABI,     C_SELA,     KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_PGDN,            KC_VOLU,    OSM_SFT,    OSM_CTL,    OSM_ALT,    OSM_GUI,    C_TABD,
-    KC_NO,      C_UNDO,     C_CUT,      C_COPY,     C_PAST,     C_REDO,             KC_VOLD,    KC_MPRV,    KC_MPLY,    KC_MNXT,    KC_MSTP,    KC_MUTE,
+    KC_NO,      KC_INS,     KC_HOME,    KC_UP,      KC_END,     KC_PGUP,            KC_APP,     C_STBI,     C_STBD,     _______,    C_DSKT,     KC_NO,
+    KC_NO,      C(KC_A),    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_PGDN,            KC_VOLU,    KC_MPRV,    KC_MPLY,    KC_MNXT,    KC_MSTP,    KC_NO,
+    KC_NO,      C(KC_Z),    C(KC_X),    C(KC_C),    C(KC_V),    C(KC_Y),            KC_VOLD,    KC_RSFT,    KC_RCTL,    KC_LALT,    KC_RGUI,    KC_NO,
                             _______,    _______,    _______,    KC_DEL,             _______,    _______,    _______,    _______
 ),
 
-[_SYST] = LAYOUT_ffkb(
-    _______,    RGB_TOG,    RGB_RMOD,   RGB_MOD,    _______,    TO(_BASE),          _______,    F_DPRS,     F_SCRS,     _______,    _______,    TO(_BASE),
-    _______,    RGB_SPI,    RGB_HUI,    RGB_SAI,    RGB_VAI,    _______,            F_ACTG,     F_DPUP,     F_SCUP,     _______,    _______,    _______,
-    _______,    RGB_SPD,    RGB_HUD,    RGB_SAD,    RGB_VAD,    _______,            _______,    F_DPDN,     F_SCDN,     _______,    QK_BOOT,    _______,
+[_MOUS] = LAYOUT_ffkb(
+    _______,    _______,    _______,    _______,    _______,    _______,            _______,    _______,    _______,    _______,    _______,    _______,
+    _______,    _______,    _______,    _______,    _______,    _______,            _______,    _______,    _______,    _______,    _______,    _______,
+    _______,    _______,    _______,    _______,    _______,    _______,            _______,    _______,    _______,    _______,    _______,    _______,
+                            _______,    _______,    _______,    _______,            _______,    _______,    _______,    _______
+    // C_SCRL,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MTOG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_ACCL,
+    // C_ZOOM,     C_MLTG,     KC_BTN3,    KC_BTN2,    KC_BTN1,    C_DBLC,             C_MTOG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_ACCL,
+    // OSM_CTL,    C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MTOG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_ACCL,
+    //                         _______,    C_MLTG,     _______,    C_MLTG,             C_MLTG,     C_MLTG,     C_MLTG,     _______
+),
+
+[_NUMB] = LAYOUT_ffkb(
+    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,              KC_EQL,     KC_7,       KC_8,       KC_9,       KC_DOT,     KC_NO,
+    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,              KC_PPLS,    KC_4,       KC_5,       KC_6,       KC_PAST,    KC_NO,
+    KC_NO,      KC_LGUI,    KC_LALT,    KC_LCTL,    KC_LSFT,    KC_NO,              KC_MINS,    KC_1,       KC_2,       KC_3,       KC_SLSH,    KC_NO,
+                            _______,    _______,    _______,    _______,            _______,    _______,    KC_0,       _______
+),
+
+[_FUNC] = LAYOUT_ffkb(
+    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,              KC_NO,      KC_F7,      KC_F8,      KC_F9,      KC_F12,     KC_NO,
+    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,              KC_NO,      KC_F4,      KC_F5,      KC_F6,      KC_F11,     KC_NO,
+    KC_NO,      KC_LGUI,    KC_LALT,    KC_LCTL,    KC_LSFT,    KC_NO,              KC_NO,      KC_F1,      KC_F2,      KC_F3,      KC_F10,     KC_NO,
                             _______,    _______,    _______,    _______,            _______,    _______,    _______,    _______
 ),
 
-// [_MOUS] = LAYOUT_ffkb(
-//     C_SCRL,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MTOG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_ACCL,
-//     C_ZOOM,     C_MLTG,     KC_BTN3,    KC_BTN2,    KC_BTN1,    C_DBLC,             C_MTOG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_ACCL,
-//     OSM_CTL,    C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,             C_MTOG,     C_MLTG,     C_MLTG,     C_MLTG,     C_MLTG,     C_ACCL,
-//                             _______,    C_MLTG,     _______,    C_MLTG,             C_MLTG,     C_MLTG,     C_MLTG,     _______
-// ),
+[_SYST] = LAYOUT_ffkb(
+    _______,    _______,    _______,    _______,    _______,    _______,            _______,    _______,    _______,    _______,    _______,    _______,
+    _______,    _______,    _______,    _______,    _______,    _______,            _______,    _______,    _______,    _______,    _______,    _______,
+    _______,    _______,    _______,    _______,    _______,    _______,            _______,    _______,    _______,    _______,    _______,    _______,
+                            _______,    _______,    _______,    _______,            _______,    _______,    _______,    _______
+    // _______,    RGB_TOG,    RGB_RMOD,   RGB_MOD,    _______,    TO(_BASE),          _______,    F_DPRS,     F_SCRS,     _______,    _______,    _______,
+    // _______,    RGB_SPI,    RGB_HUI,    RGB_SAI,    RGB_VAI,    _______,            F_ACTG,     F_DPUP,     F_SCUP,     _______,    _______,    _______,
+    // _______,    RGB_SPD,    RGB_HUD,    RGB_SAD,    RGB_VAD,    _______,            _______,    F_DPDN,     F_SCDN,     _______,    QK_BOOT,    _______,
+    //                         _______,    _______,    _______,    _______,            _______,    _______,    _______,    _______
+),
+
 
 // Combo layer. Never to be activated, just used or combo indexing purposes.
 [_COMB] = LAYOUT_ffkb(

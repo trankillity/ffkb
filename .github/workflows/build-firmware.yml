@@ -21,12 +21,6 @@ jobs:
       with:
         path: keyboards/fingerpunch/ffkb/byomcu/v3/keymaps/${{ github.actor }}
 
-    # - name: Checkout Case Modes
-    #   uses: actions/checkout@v3
-    #   with:
-    #     repository: andrewjrae/kyria-keymap
-    #     path: keyboards/splitkb/kyria/keymaps/andrewjrae
-
     - name: Build firmware
       run: make fingerpunch/ffkb/byomcu/v3:${{ github.actor }} FP_TRACKBALL_ENABLE=yes CONVERT_TO=stemcell
 

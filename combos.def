@@ -4,6 +4,12 @@
     KC_3,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,          KC_K,    KC_H,    KC_COMM,    KC_DOT,    KC_SLSH,    KC_6,
 */
 
+/* System */
+COMB(login, C(A(KC_DEL)), KC_Q, KC_W, KC_Y, KC_QUOT)
+COMB(bwfill, C(S(KC_L)), KC_G, KC_M)
+COMB(caps, KC_CAPS, KC_B, KC_J)
+COMB(boot, QK_BOOT, KC_Z, KC_X, KC_DOT, KC_SLSH)
+
 /* Brackets */
 COMB(lbrk, KC_LBRC, KC_W, KC_F)
 COMB(rbrk, KC_RBRC, KC_U, KC_Y)
@@ -17,18 +23,13 @@ COMB(mins, KC_MINUS, KC_P, KC_T)
 COMB(unds, KC_UNDERSCORE, KC_L, KC_N)
 COMB(eqal, KC_EQUAL, KC_F, KC_S)
 COMB(excl, KC_EXCLAIM, KC_U, KC_E)
+COMB(grav, KC_GRAVE, KC_R, KC_X)
+COMB(bsls, KC_BSLASH, KC_S, KC_C)
+COMB(fsls, KC_FSLASH, KC_E, KC_COMM)
 
-/* Functions */
-//COMB(capw, C_CAPW, KC_G, KC_M)
-//COMB(snkc, C_SNKC, KC_B, KC_J)
-COMB(caps, KC_CAPS, KC_V, KC_K)
-
-/* System */
-COMB(login, C(A(KC_DEL)), KC_Q, KC_QUOT)
-COMB(boot, QK_BOOT, KC_Z, KC_X, KC_DOT, KC_SLSH)
 
 /* Mouse */
-COMB(mouse1, KC_MS_BTN1, KC_R, KC_T)
-COMB(mouse2, KC_MS_BTN2, KC_W, KC_P)
-COMB(mouse3, KC_MS_BTN3, KC_X, KC_D)
-COMB(scroll, FP_SCROLL_MOMENT, KC_A, KC_T)
+// COMB(mouse1, KC_MS_BTN1, KC_R, KC_T)
+// COMB(mouse2, KC_MS_BTN2, KC_W, KC_P)
+// COMB(mouse3, KC_MS_BTN3, KC_X, KC_D)
+// COMB(scroll, FP_SCROLL_MOMENT, KC_A, KC_T)
