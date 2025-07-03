@@ -25,7 +25,7 @@ jobs:
       run: make fingerpunch/ffkb/byomcu/v3:${{ github.actor }} FP_TRACKBALL_ENABLE=yes CONVERT_TO=stemcell
 
     - name: Archive firmware
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ffkb_v3_${{ github.actor }}
         retention-days: 2
