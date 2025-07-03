@@ -2,7 +2,7 @@
 
 #define COMBO_VARIABLE_LEN
 #undef COMBO_TERM
-#define COMBO_TERM 30
+#define COMBO_TERM 40
 
 // #ifdef FP_POINTING_DEFAULT_DPI
 //     #undef FP_POINTING_DEFAULT_DPI
