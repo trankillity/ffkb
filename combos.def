@@ -24,8 +24,8 @@ COMB(unds, KC_UNDERSCORE, KC_L, KC_N)
 COMB(eqal, KC_EQUAL, KC_F, KC_S)
 COMB(excl, KC_EXCLAIM, KC_U, KC_E)
 COMB(grav, KC_GRAVE, KC_R, KC_X)
-COMB(bsls, KC_BSLASH, KC_S, KC_C)
-COMB(fsls, KC_FSLASH, KC_E, KC_COMM)
+COMB(bsls, KC_BACKSLASH, KC_S, KC_C)
+COMB(fsls, KC_SLASH, KC_E, KC_COMM)
 
 
 /* Mouse */
