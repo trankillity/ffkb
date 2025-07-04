@@ -15,16 +15,16 @@ enum layer_names {
     _COMB
 };
 
-// Tap Dance declarations
-enum {
-    TD_NF,
-};
+// // Tap Dance declarations
+// enum {
+//     TD_NF,
+// };
 
-// Tap Dance definitions
-tap_dance_action_t tap_dance_actions[] = {
-    // Tap once for Escape, twice for Caps Lock
-    [TD_NF] = ACTION_TAP_DANCE_DOUBLE(MO(_NUMB), MO(_FUNC)),
-};
+// // Tap Dance definitions
+// tap_dance_action_t tap_dance_actions[] = {
+//     // Tap once for Escape, twice for Caps Lock
+//     [TD_NF] = ACTION_TAP_DANCE_DOUBLE(MO(_NUMB), MO(_FUNC)),
+// };
 
 #define COMBO_ONLY_FROM_LAYER _BASE
 
@@ -76,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_NO,      KC_Q,       KC_W,       KC_F,       KC_P,       KC_B,               KC_J,       KC_L,       KC_U,       KC_Y,       KC_QUOT,    KC_NO,
     KC_NO,      KC_A,       KC_R,       KC_S,       KC_T,       KC_G,               KC_M,       KC_N,       KC_E,       KC_I,       KC_O,       KC_NO,
     KC_NO,      MM(LGUI,Z), MM(LALT,X), MM(LCTL,C), MM(LSFT,D), KC_V,               KC_K,       MM(RSFT,H), MM(RCTL,COMM), MM(RALT,DOT), MM(RGUI,SLSH),    KC_NO,
-                            KC_NO,      TD(TD_NF),  OSM_SFT,    KC_BSPC,            KC_ENTER,   KC_SPC,     MO(_NAVI),  KC_NO
+                            KC_NO,      MO(_NUMB),  OSM_SFT,    KC_BSPC,            KC_ENTER,   KC_SPC,     MO(_NAVI),  KC_NO
 ),
 
 [_NAVI] = LAYOUT_ffkb(
@@ -139,6 +139,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ),
 
 };
+
+const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
+    LAYOUT_ffkb(
+        'L', 'L', 'L', 'L', 'L', 'L',  'R', 'R', 'R', 'R', 'R', 'R', 
+        'L', 'L', 'L', 'L', 'L', 'L',  'R', 'R', 'R', 'R', 'R', 'R', 
+        'L', 'L', 'L', 'L', 'L', 'L',  'R', 'R', 'R', 'R', 'R', 'R', 
+                  'L', 'L', '*', 'L',  'R', 'R', 'R', 'R'
+    );
 
 const key_override_t comma_override = ko_make_basic(MOD_MASK_SHIFT, KC_COMMA, KC_SCLN);
 const key_override_t fstop_override = ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_COLON);
