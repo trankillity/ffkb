@@ -75,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_BASE] = LAYOUT_ffkb(
     KC_NO,      KC_Q,       KC_W,       KC_F,       KC_P,       KC_B,               KC_J,       KC_L,       KC_U,       KC_Y,       KC_QUOT,    KC_NO,
     KC_NO,      KC_A,       KC_R,       KC_S,       KC_T,       KC_G,               KC_M,       KC_N,       KC_E,       KC_I,       KC_O,       KC_NO,
-    KC_NO,      MM(LGUI,Z), MM(LALT,X), MM(LCTL,C), MM(LSFT,D), KC_V,               KC_K,       MM(RSFT,H), MM(RCTL,COMM), MM(RALT,DOT), MM(RGUI,SLSH),    KC_NO,
+    KC_NO,      MM(LGUI,Z), MM(LALT,X), MM(LCTL,C), MM(LSFT,D), KC_V,               KC_K,       MM(RSFT,H), MM(RCTL,COMM), MM(LALT,DOT), MM(RGUI,SLSH),    KC_NO,
                             KC_NO,      MO(_NUMB),  OSM_SFT,    KC_BSPC,            KC_ENTER,   KC_SPC,     MO(_NAVI),  KC_NO
 ),
 
