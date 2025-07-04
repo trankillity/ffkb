@@ -148,8 +148,8 @@ const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
                   'L', 'L', '*', 'L',  'R', 'R', 'R', 'R'
     );
 
-const key_override_t comma_override = ko_make_basic(MOD_MASK_SHIFT, KC_COMMA, KC_SCLN);
-const key_override_t fstop_override = ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_COLON);
+const key_override_t comma_override = ko_make_basic(MOD_MASK_SHIFT, MT(KC_RCTL,KC_COMM), KC_SCLN);
+const key_override_t fstop_override = ko_make_basic(MOD_MASK_SHIFT, MT(KC_LALT,KC_DOT), KC_COLON);
 
 // This globally defines all key overrides to be used
 const key_override_t **key_overrides = (const key_override_t *[]){
