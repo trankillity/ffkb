@@ -15,6 +15,17 @@ enum layer_names {
     _COMB
 };
 
+// Tap Dance declarations
+enum {
+    TD_NF,
+};
+
+// Tap Dance definitions
+tap_dance_action_t tap_dance_actions[] = {
+    // Tap once for Escape, twice for Caps Lock
+    [TD_NF] = ACTION_TAP_DANCE_DOUBLE(MO(_NUMB), MO(_FUNC)),
+};
+
 #define COMBO_ONLY_FROM_LAYER _BASE
 
 // General Shortcuts
@@ -65,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_NO,      KC_Q,       KC_W,       KC_F,       KC_P,       KC_B,               KC_J,       KC_L,       KC_U,       KC_Y,       KC_QUOT,    KC_NO,
     KC_NO,      KC_A,       KC_R,       KC_S,       KC_T,       KC_G,               KC_M,       KC_N,       KC_E,       KC_I,       KC_O,       KC_NO,
     KC_NO,      MM(LGUI,Z), MM(LALT,X), MM(LCTL,C), MM(LSFT,D), KC_V,               KC_K,       MM(RSFT,H), MM(RCTL,COMM), MM(RALT,DOT), MM(RGUI,SLSH),    KC_NO,
-                            KC_NO,      MO(_NUMB),  OSM_SFT,    KC_BSPC,            KC_ENTER,   KC_SPC,     MO(_NAVI),  KC_NO
+                            KC_NO,      TD(TD_NF),  OSM_SFT,    KC_BSPC,            KC_ENTER,   KC_SPC,     MO(_NAVI),  KC_NO
 ),
 
 [_NAVI] = LAYOUT_ffkb(
@@ -128,92 +139,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ),
 
 };
-
-// bool is_mouse_record_user(uint16_t keycode, keyrecord_t* record) {
-//     switch(keycode) {
-//         case C_DBLC:
-//         case C_SCRL:
-//         case C_ZOOM:
-//             return true;
-//         default:
-//             return false;
-//     }
-// }
-
-// bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-//     if (!process_case_modes(keycode, record)) {
-//         return false;
-//     }
-//     switch (keycode) {
-//         case C_CAPW: {
-//             if (record->event.pressed) {
-//                 enable_caps_word();
-//             }
-//             return false;
-//         }
-//         case C_SNKC: {
-//             if (record->event.pressed) {
-//                 enable_xcase_with(KC_UNDS);
-//             }            
-//             return false;
-//         }
-//         case C_KEBC: {
-//             if (record->event.pressed) {
-//                 enable_xcase_with(KC_MINUS);
-//             }            
-//             return false;
-//         }
-//         case C_XCSE: {
-//             if (record->event.pressed) {
-//                 enable_xcase();
-//             }            
-//             return false;
-//         }
-//         case C_DBLC:
-//             if (record->event.pressed) {
-//                 tap_code(KC_BTN1);
-//             } else {
-//                 tap_code(KC_BTN1);
-//             }
-//             return false;
-//         case C_MLTG:
-//             if (record->event.pressed) {
-//                 layer_off(_MOUS);
-//                 return true;
-//             }
-//         case C_SCRL:
-//             if (record->tap.count && record->event.pressed) {
-//                 fp_scroll_keycode_toggle();
-//             } else if (record->event.pressed) {
-//                 fp_scroll_keycode_set(true);
-//             } else if (!record->tap.count) {
-//                 fp_scroll_keycode_set(false);
-//             }
-//             return false;
-//         case C_ZOOM:
-//             if (record->tap.count && record->event.pressed) {
-//                 fp_zoom_keycode_toggle();
-//             } else if (record->event.pressed) {
-//                 fp_zoom_keycode_set(true);
-//             } else if (!record->tap.count) {
-//                 fp_zoom_keycode_set(false);
-//             }
-//             return false;
-//         default:
-//             return true;
-//     }
-//     return true;
-// };
-
-// layer_state_t layer_state_set_user(layer_state_t state) {
-//     if (get_highest_layer(state) != _MOUS) {
-//         fp_zoom_layer_set(false);
-//         fp_scroll_layer_set(false);
-//         fp_zoom_keycode_set(false);
-//         fp_scroll_keycode_set(false);
-//     }
-//     return state;
-// }
 
 const key_override_t comma_override = ko_make_basic(MOD_MASK_SHIFT, KC_COMMA, KC_SCLN);
 const key_override_t fstop_override = ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_COLON);

@@ -28,7 +28,6 @@ COMB(grav, KC_GRAVE, KC_R, MT(MOD_LALT,KC_X))
 COMB(bsls, KC_BACKSLASH, KC_S, MT(MOD_LCTL,KC_C))
 COMB(fsls, KC_SLASH, KC_E, MT(MOD_RCTL,KC_COMM))
 
-
 /* Mouse */
 // COMB(mouse1, KC_MS_BTN1, KC_R, KC_T)
 // COMB(mouse2, KC_MS_BTN2, KC_W, KC_P)
