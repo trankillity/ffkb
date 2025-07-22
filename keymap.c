@@ -74,15 +74,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_BASE] = LAYOUT_ffkb(
     KC_NO,      KC_Q,       KC_W,       KC_F,       KC_P,       KC_B,               KC_J,       KC_L,       KC_U,       KC_Y,       KC_QUOT,    KC_NO,
-    KC_NO,      KC_A,       KC_R,       KC_S,       KC_T,       KC_G,               KC_M,       KC_N,       KC_E,       KC_I,       KC_O,       KC_NO,
-    KC_NO,      MM(LGUI,Z), MM(LALT,X), MM(LCTL,C), MM(LSFT,D), KC_V,               KC_K,       MM(RSFT,H), MM(RCTL,COMM), MM(LALT,DOT), MM(RGUI,SLSH),    KC_NO,
+    KC_NO,      MM(LGUI,A), MM(LALT,R), MM(LCTL,S), MM(LSFT,T), KC_G,               KC_M,       MM(RSFT,N), MM(RCTL,E), MM(LALT,I), MM(RGUI,O), KC_NO,
+    KC_NO,      KC_Z,       KC_X,       KC_C,       KC_D,       KC_V,               KC_K,       KC_H,       KC_COMM,    KC_DOT,     KC_SLSH,    KC_NO,
                             KC_NO,      MO(_NUMB),  OSM_SFT,    KC_BSPC,            KC_ENTER,   KC_SPC,     MO(_NAVI),  KC_NO
 ),
 
 [_NAVI] = LAYOUT_ffkb(
     KC_NO,      KC_INS,     KC_HOME,    KC_UP,      KC_END,     KC_PGUP,            KC_APP,     C_STBI,     C_STBD,     _______,    C_DSKT,     KC_NO,
-    KC_NO,      C(KC_A),    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_PGDN,            KC_VOLU,    KC_MPRV,    KC_MPLY,    KC_MNXT,    KC_MSTP,    KC_NO,
-    KC_NO,      C(KC_Z),    C(KC_X),    C(KC_C),    C(KC_V),    C(KC_Y),            KC_VOLD,    KC_RSFT,    KC_RCTL,    KC_LALT,    KC_RGUI,    KC_NO,
+    KC_NO,      C(KC_A),    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_PGDN,            KC_VOLU,    KC_RSFT,    KC_RCTL,    KC_LALT,    KC_RGUI,    KC_NO,
+    KC_NO,      C(KC_Z),    C(KC_X),    C(KC_C),    C(KC_V),    C(KC_Y),            KC_VOLD,    KC_MPRV,    KC_MPLY,    KC_MNXT,    KC_MSTP,    KC_NO,
                             _______,    _______,    _______,    KC_DEL,             _______,    _______,    _______,    _______
 ),
 
@@ -99,15 +99,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_NUMB] = LAYOUT_ffkb(
     KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,              KC_EQL,     KC_7,       KC_8,       KC_9,       KC_DOT,     KC_NO,
-    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,              KC_PPLS,    KC_4,       KC_5,       KC_6,       KC_PAST,    KC_NO,
-    KC_NO,      KC_LGUI,    KC_LALT,    KC_LCTL,    KC_LSFT,    KC_NO,              KC_MINS,    KC_1,       KC_2,       KC_3,       KC_SLSH,    KC_NO,
+    KC_NO,      KC_LGUI,    KC_LALT,    KC_LCTL,    KC_LSFT,    KC_NO,              KC_PPLS,    KC_4,       KC_5,       KC_6,       KC_PAST,    KC_NO,
+    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,              KC_MINS,    KC_1,       KC_2,       KC_3,       KC_SLSH,    KC_NO,
                             _______,    _______,    _______,    _______,            _______,    _______,    KC_0,       _______
 ),
 
 [_FUNC] = LAYOUT_ffkb(
     KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,              KC_NO,      KC_F7,      KC_F8,      KC_F9,      KC_F12,     KC_NO,
-    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,              KC_NO,      KC_F4,      KC_F5,      KC_F6,      KC_F11,     KC_NO,
-    KC_NO,      KC_LGUI,    KC_LALT,    KC_LCTL,    KC_LSFT,    KC_NO,              KC_NO,      KC_F1,      KC_F2,      KC_F3,      KC_F10,     KC_NO,
+    KC_NO,      KC_LGUI,    KC_LALT,    KC_LCTL,    KC_LSFT,    KC_NO,              KC_NO,      KC_F4,      KC_F5,      KC_F6,      KC_F11,     KC_NO,
+    KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,              KC_NO,      KC_F1,      KC_F2,      KC_F3,      KC_F10,     KC_NO,
                             _______,    _______,    _______,    _______,            _______,    _______,    _______,    _______
 ),
 
@@ -148,8 +148,8 @@ const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
                   'L', 'L', '*', 'L',  'R', 'R', 'R', 'R'
     );
 
-const key_override_t comma_override = ko_make_basic(MOD_MASK_SHIFT, MT(KC_RCTL,KC_COMM), KC_SCLN);
-const key_override_t fstop_override = ko_make_basic(MOD_MASK_SHIFT, MT(KC_LALT,KC_DOT), KC_COLON);
+const key_override_t comma_override = ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_SCLN);
+const key_override_t fstop_override = ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_COLON);
 
 // This globally defines all key overrides to be used
 const key_override_t **key_overrides = (const key_override_t *[]){
