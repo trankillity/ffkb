@@ -152,8 +152,7 @@ const key_override_t comma_override = ko_make_basic(MOD_MASK_SHIFT, KC_COMM, KC_
 const key_override_t fstop_override = ko_make_basic(MOD_MASK_SHIFT, KC_DOT, KC_COLON);
 
 // This globally defines all key overrides to be used
-const key_override_t **key_overrides = (const key_override_t *[]){
+const key_override_t *key_overrides[] = {
     &comma_override,
-    &fstop_override,
-    NULL // Null terminate the array of overrides!
+    &fstop_override
 };
